@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/07 17:19:41 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/07 18:38:51 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@
 	error("TEST");
 }*/
 
-int	check_space(char *s)
-{
-	if (*s == '\0')
-		return (FALSE);
-	while (*s)
-	{
-		if (*s == 32 || (*s >= 9 && *s <= 13))
-			return (FALSE);
-		s++;
-	}
-	return (TRUE);
-}
-
 int main(void)
 {
 	char	*line;
@@ -53,7 +40,6 @@ int main(void)
 			add_history(line);
 		free(line);
 	}
-
 	// "\x1b[A": UP, "\x1b[B": DOWN, "\x1b[C": RIGHT, "\x1b[D": LEFT
 	// \x1b == \033
 	ft_putstr_fd("\x1b[1A", 1);

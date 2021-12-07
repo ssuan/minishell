@@ -6,10 +6,9 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:58:37 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:01:23 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/07 18:40:19 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -42,7 +41,8 @@ void	handle_signal(int signo)
 {
 	pid_t	pid;
 
-	pid = waitpid(-1, NULL, WNOHANG);if (signo == SIGINT)
+	pid = waitpid(-1, NULL, WNOHANG);
+	if (signo == SIGINT)
 		ft_sigint(pid);
 	if (signo == SIGQUIT)
 		ft_sigquit(pid);
