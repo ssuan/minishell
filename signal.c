@@ -6,27 +6,31 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 13:58:37 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 15:17:05 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/07 17:01:23 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <signal.h>
-#include <sys/wait.h>
-#include "libft/libft.h"
+
+#include "minishell.h"
 
 void	ft_sigint(pid_t pid)
 {
-	if (pid == -1) // 자식 프로세스 x
-		ft_putstr_fd("자식 프로세스 x\n", 1);
-	else // 자식 프로세스 o
+	if (pid == -1)
+	{
+		rl_replace_line("", 0);
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
 		ft_putstr_fd("\n", 1);
 }
 
-void	ft_sigquit(pit_t pid)
+void	ft_sigquit(pid_t pid)
 {
-	if (pid == -1) // 자식 프로세스 x
-		ft_putstr_fd("자식 프로세스 x\n", 1);
-	else // 자식 프로세스 o
+	if (pid == -1)
+		return ;
+	else
 		ft_putstr_fd("Quit: 3\n", 1);
 }
 

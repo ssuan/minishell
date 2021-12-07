@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/07 15:20:43 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:20:33 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <sys/wait.h>
+#include "libft/libft.h"
 # include "./libft/libft.h"
+# include "./get_next_line/get_next_line.h"
 
 # define FAIL 0
 # define SUCCESS 1
+
+# define TRUE 1
+# define FALSE 0
 
 # define STR_ENV_SETTING_ERR "Minishell is failed to set environmental variables."
 
@@ -51,11 +58,14 @@ typedef struct s_state
 {
 	char			**env;
 	int				env_len;
-}t_state;
+}	t_state;
 
 t_state				g_state;
 
 int     error(char *msg);
 int		initialize_data(int argc, char **argv, char **envp);
+
+void	set_signal(void);
+int	check_space(char *s);
 
 #endif
