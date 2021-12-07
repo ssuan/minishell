@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:43:31 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/07 14:51:14 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/07 15:17:13 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int     error(char *msg)
 {
-        printf("\e[31m\e[1mError\n%s \e[0m \n", msg);
+        printf("%sError: %s %s\n", COLOR_RED, msg, COLOR_NORMAL);
         exit (EXIT_FAILURE);
 }
