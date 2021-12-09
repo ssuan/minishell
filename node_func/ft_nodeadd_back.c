@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_nodeadd_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 12:24:00 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:15:06 by suan              #+#    #+#             */
+/*   Updated: 2021/12/07 17:03:58 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "./../minishell.h"
 
-int main(int argc, char **argv, char **envp)
+void	ft_nodeadd_back(t_node **node, t_node *new)
 {
-    int loop;
+	t_node	*last;
 
-    loop = 0;
-
-    initialize_data(argc, argv, envp);
-    parse_cmd("\'ABCDEF\'FFFF");
-    
-    // while (g_state.env[loop] != 0)
-    // {
-    //     printf("[%d] = [%s]\n", loop, g_state.env[loop]);
-    //     loop++;
-    // }
-    // error("TEST");
+	if (!node || !new)
+		return ;
+	if (!*node)
+	{
+		*node = new;
+		return ;
+	}
+	last = ft_lstlast(*node);
+	new->next = 0;
+	last->next = new;
+	new->prev = last;
 }

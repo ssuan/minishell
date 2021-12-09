@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_nodemap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 12:24:00 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:27:04 by suan              #+#    #+#             */
+/*   Updated: 2021/12/07 17:07:34 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "./../minishell.h"
 
-int main(int argc, char **argv, char **envp)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-    int loop;
+	t_list	*new;
+	t_list	*map;
 
-    loop = 0;
-
-    initialize_data(argc, argv, envp);
-    parse_cmd("\'ABCDEF\'FFFF");
-    
-    // while (g_state.env[loop] != 0)
-    // {
-    //     printf("[%d] = [%s]\n", loop, g_state.env[loop]);
-    //     loop++;
-    // }
-    // error("TEST");
+	if (!lst || !f)
+		return (0);
+	map = 0;
+	while (lst)
+	{
+		new = ft_lstnew((*f)(lst->content));
+		if (!new)
+		{
+			ft_lstclear(&map, del);
+			return (0);
+		}
+		ft_lstadd_back(&map, new);
+		lst = lst->next;
+	}
+	return (map);
 }

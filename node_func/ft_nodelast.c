@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_nodelast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 12:24:00 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:11:50 by suan              #+#    #+#             */
+/*   Updated: 2021/12/07 17:30:54 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int main(int argc, char **argv, char **envp)
+#include "./../minishell.h"
+ 
+t_node	*ft_nodelast(t_node *node)
 {
-    int loop;
-
-    loop = 0;
-
-    initialize_data(argc, argv, envp);
-    parse_cmd("\'ABCDEF\'FFFF");
-    
-    // while (g_state.env[loop] != 0)
-    // {
-    //     printf("[%d] = [%s]\n", loop, g_state.env[loop]);
-    //     loop++;
-    // }
-    // error("TEST");
+	if (!node)
+		return (0);
+	while (node->next)
+		node = node->next;
+	return (node);
 }

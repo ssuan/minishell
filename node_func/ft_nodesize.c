@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_nodesize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 12:24:00 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 13:30:15 by suan              #+#    #+#             */
+/*   Updated: 2021/12/07 17:32:21 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "./../minishell.h"
 
-int main(int argc, char **argv, char **envp)
+int	ft_nodesize(t_node *node)
 {
-    int loop;
+	int	size;
 
-    loop = 0;
-
-    initialize_data(argc, argv, envp);
-    parse_cmd("\'ABCDEF\'FFFF");
-    
-    // while (g_state.env[loop] != 0)
-    // {
-    //     printf("[%d] = [%s]\n", loop, g_state.env[loop]);
-    //     loop++;
-    // }
-    // error("TEST");
+	size = 0;
+	while (node)
+	{
+		++size;
+		node = node->next;
+	}
+	return (size);
 }

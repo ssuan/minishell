@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_nodeiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 12:24:00 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:24:01 by suan              #+#    #+#             */
+/*   Updated: 2021/12/07 17:30:30 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "./../minishell.h"
 
-int main(int argc, char **argv, char **envp)
+void	ft_nodeiter(t_node *node, void (*f)(void *))
 {
-    int loop;
-
-    loop = 0;
-
-    initialize_data(argc, argv, envp);
-    parse_cmd("\'ABCDEF\'FFFF");
-    
-    // while (g_state.env[loop] != 0)
-    // {
-    //     printf("[%d] = [%s]\n", loop, g_state.env[loop]);
-    //     loop++;
-    // }
-    // error("TEST");
+	if (!node || !f)
+		return ;
+	while (node)
+	{
+		f(node->contents);
+		node = node->next;
+	}
 }
