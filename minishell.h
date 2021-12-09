@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/07 17:20:33 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/09 17:17:11 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
-#include "libft/libft.h"
+# include <sys/stat.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
 
@@ -67,5 +67,6 @@ int		initialize_data(int argc, char **argv, char **envp);
 
 void	set_signal(void);
 int	check_space(char *s);
+int	execution(char *cmd);
 
 #endif
