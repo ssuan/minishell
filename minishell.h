@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/09 18:30:57 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:35:38 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ typedef struct s_node
 	struct s_node	*prev;
 }t_node;
 
-
 typedef struct s_cmd
 {
 	char			**cmd;
 	int				size;
-	struct s_node	*first;
-	struct s_node	*last;
+	struct s_cmd	*first;
+	struct s_cmd	*last;
 }t_cmd;
 
 typedef struct s_state
