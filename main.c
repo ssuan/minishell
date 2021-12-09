@@ -6,37 +6,54 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 16:51:47 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/09 17:12:01 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/stat.h>
 
-/*int main(int argc, char **argv, char **envp)
+// int main(int argc, char **argv, char **envp)
+// {
+// 	int loop;
+
+// 	loop = 0;
+
+// 	initialize_data(argc, argv, envp);
+// 	while (g_state.env[loop] != 0)
+// 	{
+// 		printf("[%d] = [%s]\n", loop, g_state.env[loop]);
+// 		loop++;
+// 	}
+// 	error("TEST");
+// }
+
+char	*find_value(char *key)
 {
-	int loop;
+	int		i;
+	int		key_len;
 
-	loop = 0;
-
-	initialize_data(argc, argv, envp);
-	while (g_state.env[loop] != 0)
+	i = 0;
+	key_len = ft_strlen(key);
+	while (g_state.env[i] != 0)
 	{
-		printf("[%d] = [%s]\n", loop, g_state.env[loop]);
-		loop++;
+		if (!ft_strncmp(g_state.env[i], key, key_len))
+			return (g_state.env[i] + key_len + 1); // 1: =
+		i++;
 	}
-	error("TEST");
-}*/
+	return (NULL);
+}
 
 char	*find_path(char *cmd)
 {
-	char		**paths = ft_split("/Users/suan/.brew/bin:/Users/suan/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/suan/.brew/bin", ':');
-	// 환경변수에서 PATH: 파싱해서 가져오기
+	char		**paths;
 	char		*path;
 	char		*temp;
 	int			i;
 	struct stat	s;
 
+	temp = find_value("PATH");
+	paths = ft_split(temp, ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -81,13 +98,10 @@ int	execution(char *cmd)
 	return (0); // 리턴 값
 }
 
-int main(void)
+int	prompt(void)
 {
 	char	*line;
-	
-	rl_catch_signals = 0; 
-	// If this variable is non-zero, Readline will install signal handlers for SIGINT, SIGQUIT, SIGTERM, SIGHUP, SIGALRM, SIGTSTP, SIGTTIN, and SIGTTOU.
-	set_signal();
+
 	while ((line = readline("minishell$ ")))
 	{
 		if (!check_space(line))
@@ -102,5 +116,15 @@ int main(void)
 	ft_putstr_fd("\x1b[1A", 1);
 	ft_putstr_fd("\x1b[11C", 1);
 	ft_putstr_fd("exit\n", 1);
+	return (0);
+}
+
+int main(int argc, char **argv, char **envp)
+{
+	rl_catch_signals = 0; 
+	// If this variable is non-zero, Readline will install signal handlers for SIGINT, SIGQUIT, SIGTERM, SIGHUP, SIGALRM, SIGTSTP, SIGTTIN, and SIGTTOU.
+	set_signal();
+	initialize_data(argc, argv, envp);
+	prompt();
 	return (0);
 }
