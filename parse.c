@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 17:55:29 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:31:23 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ t_node	*parse_cmd(char *line)
 	{
 		tmp_node = tmp_node->next;
 		if(tmp_node != 0)
-			printf("node[%s]\n", tmp_node->contents);
+			printf("node[%s]\n", tmp_node->str);
 	}
 	return (0);
 }

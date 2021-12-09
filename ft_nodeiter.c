@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 20:24:01 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 13:41:05 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:31:45 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_nodeiter(t_node *node, void (*f)(void *))
 		return ;
 	while (node)
 	{
-		f(node->contents);
+		f(node->str);
 		node = node->next;
 	}
 }

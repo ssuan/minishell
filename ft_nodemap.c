@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 20:27:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 13:41:36 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:31:57 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_node	*ft_nodemap(t_node *node, void *(*f)(void *), void (*del)(void *))
 	map = 0;
 	while (node)
 	{
-		new = ft_nodenew((*f)(node->contents));
+		new = ft_nodenew((*f)(node->str));
 		if (!new)
 		{
 			ft_nodeclear(&map, del);

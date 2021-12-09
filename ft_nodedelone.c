@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 20:18:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 13:41:01 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:31:06 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_nodedelone(t_node *node, void (*del)(void *))
 {
 	if (!node || !del)
 		return ;
-	del(node->contents);
+	del(node->str);
 	free(node);
 }

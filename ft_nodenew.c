@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 13:13:23 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 13:41:15 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 18:32:02 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_node	*ft_nodenew(void *content)
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (0);
-	new->contents = content;
+	new->str = content;
 	new->next = 0;
 	return (new);
 }
