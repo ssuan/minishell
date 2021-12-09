@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 17:36:25 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/09 18:31:39 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*find_path(char *cmd)
 }
 
 // 빌트인 함수 확인, 리다이렉트 처리, 리턴 값, 에러메시지 수정
+// int	execution(char **cmd)로 수정, split 함수 제거
 int	execution(char *cmd)
 {
 	char	*path;
@@ -71,7 +72,8 @@ int	execution(char *cmd)
 		ret = execve(path, cmdlines, g_state.env);
 		if (ret == -1)
 		{
-			ft_putstr_fd("command not found\n", 2); // 에러메시지 수정
+			ft_putstr_fd(cmdlines[0], 2); // 에러메시지 수정
+			ft_putstr_fd(": command not found\n", 2); // 에러메시지 수정
 			exit(ret);
 		}
 	}
