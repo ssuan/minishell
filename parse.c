@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 16:51:06 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:55:29 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,49 @@ int		check_syntax_space(char *line)
 }
 
 
-char	*process_qoute(t_cmd *cmd, char *line)
+char	*process_qoute(char *line)
 {
 	char	*pos;
-	int		cmd_len;
+	int		str_len;
 	char	*sub_str;
 
 	pos = ft_strchr(line + 1, (int)*line);
 	if (pos == NULL)
-	{	
+	{
 		printf("%s%s%s\n", COLOR_RED, STR_SINGLE_QUOTE_ERR,COLOR_NORMAL);
+		//free(필요)
 		return (FAIL);
 	}
 	else
 	{
-		cmd_len = pos - (line + 1);
-		if (cmd != NULL)
-			sub_str = ft_substr(line + 1, 0, cmd_len);
+		str_len = pos - (line + 1);	
+		sub_str = ft_substr(line + 1, 0, str_len);
+		if (sub_str == NULL)
+			return (NULL);
 	}
 	return (sub_str);
 }
 
-int	process_pipe(t_cmd *cmd, t_node *node,char *line, char *save_str)
+int	process_pipe(t_node *node,char *line, char *save_str)
 {
 	char	*node_str;
 
-	if (save_str != NULL && *save_str != NULL)
+	if (save_str != NULL && *save_str != 0)
 	{
 		node_str = ft_strdup(save_str);
-		ft_nodeadd_back(node, ft_nodenew((char *)node_str));
+		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
 		free(save_str);
 	}
 	node_str = ft_strdup("|");
-	ft_nodeadd_back(node, ft_nodenew((char *)node_str));
+	ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
 	return (1);
 }
 
-int process_redir(t_cmd *cmd, t_node *node,char *line, char *save_str)
+int process_redir(t_node *node,char *line, char *save_str)
 {
 	char	*node_str;
 
-	if (save_str != NULL && *save_str != NULL)
+	if (save_str != NULL && *save_str != 0)
 	{
 		node_str = ft_strdup(save_str);	
 		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
@@ -101,43 +103,79 @@ int process_redir(t_cmd *cmd, t_node *node,char *line, char *save_str)
 }
 
 
-t_cmd	*parse_cmd(char *line)
+t_node	*parse_cmd(char *line)
 {
-	t_cmd	*cmd;
 	t_node	*tmp_node;
 	char	*tmp_str;
+	char	*save_str;
+	char	*free_str;
 
-	cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+	save_str = 0;
 	tmp_node = (t_node *)ft_calloc(1, sizeof(t_node));
 	while (*line != 0)
 	{
+	//	printf("CUR[%c]\n", *line);
 		if(*line == ' ')
+		{
+			if (save_str != NULL && *save_str != 0)
+			{
+				tmp_str = ft_strdup(save_str);
+				ft_nodeadd_back(&tmp_node, ft_nodenew((char *)tmp_str));
+				free(save_str);
+				save_str = 0;
+			}
 			line++;
+		}
 		else if(*line == '\'' || *line == '\"')
 		{
-			tmp_str = process_qoute(cmd, line);
+			if (save_str == NULL)
+			{
+			//	printf("[!]");
+				save_str = ft_strdup("");
+			}
+			tmp_str = process_qoute(line);
 			if (!tmp_str)
 				return (FAIL);
-			ft_nodeadd_back(&tmp_node, ft_nodenew((char *)tmp_str));
-			line += ft_strlen(tmp_str) + 1;
+			free_str = save_str;
+			save_str = ft_strjoin(save_str, tmp_str);
+			line += ft_strlen(save_str) + 1 + 1;
 			free(tmp_str);
+			free(free_str);
 		}
 		else if(*line == '|' )
-			line += process_pipe(cmd, tmp_node, line, tmp_str);
+		{
+			line += process_pipe(tmp_node, line, save_str);
+			save_str = 0;
+		}
 		else if(*line == '<' || *line == '>')
-			line += process_redir(cmd, tmp_node, line, tmp_str);
+		{
+			line += process_redir(tmp_node, line, save_str);
+			save_str = 0;
+		}
 		else
 		{
-			
+			if (save_str == NULL)
+				save_str = ft_strdup("");
+			free_str = save_str;
+			tmp_str = (char *)ft_calloc(2, sizeof(char));
+			tmp_str[0] = *line;
+			save_str = ft_strjoin(save_str, tmp_str);
+			line++;
+			free(free_str);
+			free(tmp_str);
 		}
-		line++;
+	}
+	if (save_str != NULL && *save_str != 0)
+	{
+		tmp_str = ft_strdup(save_str);
+		ft_nodeadd_back(&tmp_node, ft_nodenew((char *)tmp_str));
+		free(save_str);
+	}
+	while (tmp_node != 0)
+	{
+		tmp_node = tmp_node->next;
+		if(tmp_node != 0)
+			printf("node[%s]\n", tmp_node->contents);
 	}
 	return (0);
-	
-	// if (check_space(line) == NULL)
-	// {
-	// 	free(line); // 가정 -> get_next_line에서 사용 할수도 있음
-	// 	return (FAIL);
-	// }
-	
 }

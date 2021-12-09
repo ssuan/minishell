@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 14:22:46 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:57:22 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **envp)
     loop = 0;
 
     initialize_data(argc, argv, envp);
-    parse_cmd("\"ABCDEF\"FFFF");
+    parse_cmd("cat input.txt");
     
     // while (g_state.env[loop] != 0)
     // {

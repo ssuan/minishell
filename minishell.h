@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/09 12:23:05 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:16:27 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_state				g_state;
 
 int     error(char *msg);
 int		initialize_data(int argc, char **argv, char **envp);
-t_cmd	*parse_cmd(char *line);
+t_node	*parse_cmd(char *line);
 
 /* NODE */
 t_node				*ft_nodenew(void *content);
