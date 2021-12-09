@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 17:17:42 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/09 17:36:25 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	execution(char *cmd)
 	ret = 0;
 	if (pid == 0)
 	{
-		ret = execve(path, cmdlines, NULL);
+		ret = execve(path, cmdlines, g_state.env);
 		if (ret == -1)
 		{
 			ft_putstr_fd("command not found\n", 2); // 에러메시지 수정
