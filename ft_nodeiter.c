@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nodeadd_back.c                                  :+:      :+:    :+:   */
+/*   ft_nodeiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 20:15:06 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:03:58 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:24:01 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:41:05 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
+#include "minishell.h"
 
-void	ft_nodeadd_back(t_node **node, t_node *new)
+void	ft_nodeiter(t_node *node, void (*f)(void *))
 {
-	t_node	*last;
-
-	if (!node || !new)
+	if (!node || !f)
 		return ;
-	if (!*node)
+	while (node)
 	{
-		*node = new;
-		return ;
+		f(node->contents);
+		node = node->next;
 	}
-	last = ft_lstlast(*node);
-	new->next = 0;
-	last->next = new;
-	new->prev = last;
 }

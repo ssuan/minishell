@@ -6,25 +6,25 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 20:19:48 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:07:20 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:41:39 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
+#include "minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_nodeclear(t_node **node, void (*del)(void *))
 {
-	t_list	*curr;
-	t_list	*next;
+	t_node	*curr;
+	t_node	*next;
 
-	if (!lst || !del)
+	if (!node || !del)
 		return ;
-	curr = *lst;
+	curr = *node;
 	while (curr)
 	{
 		next = curr->next;
-		ft_lstdelone(curr, del);
+		ft_nodedelone(curr, del);
 		curr = next;
 	}
-	*lst = 0;
+	*node = 0;
 }

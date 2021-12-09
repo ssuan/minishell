@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nodenew.c                                       :+:      :+:    :+:   */
+/*   ft_nodelast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 13:13:23 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:07:38 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:11:50 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:41:10 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
-
-t_list	*ft_lstnew(void *content)
+#include "minishell.h"
+ 
+t_node	*ft_nodelast(t_node *node)
 {
-	t_list	*new;
-
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
+	if (!node)
 		return (0);
-	new->content = content;
-	new->next = 0;
-	return (new);
+	while (node->next)
+		node = node->next;
+	return (node);
 }

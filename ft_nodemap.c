@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nodedelone.c                                    :+:      :+:    :+:   */
+/*   ft_nodemap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 20:18:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:14:12 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:27:04 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:41:36 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
+#include "minishell.h"
 
-void	ft_nodedelone(t_node *node, void (*del)(void *))
+t_node	*ft_nodemap(t_node *node, void *(*f)(void *), void (*del)(void *))
 {
-	if (!node || !del)
-		return ;
-	del(node->contents);
-	free(node);
+	t_node	*new;
+	t_node	*map;
+
+	if (!node || !f)
+		return (0);
+	map = 0;
+	while (node)
+	{
+		new = ft_nodenew((*f)(node->contents));
+		if (!new)
+		{
+			ft_nodeclear(&map, del);
+			return (0);
+		}
+		ft_nodeadd_back(&map, new);
+		node = node->next;
+	}
+	return (map);
 }

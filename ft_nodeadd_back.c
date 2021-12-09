@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nodemap.c                                       :+:      :+:    :+:   */
+/*   ft_nodeadd_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 20:27:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:07:34 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:15:06 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:42:37 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
+#include "minishell.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+void	ft_nodeadd_back(t_node **node, t_node *new)
 {
-	t_list	*new;
-	t_list	*map;
+	t_node	*last;
 
-	if (!lst || !f)
-		return (0);
-	map = 0;
-	while (lst)
+	if (!node || !new)
+		return ;
+	if (!*node)
 	{
-		new = ft_lstnew((*f)(lst->content));
-		if (!new)
-		{
-			ft_lstclear(&map, del);
-			return (0);
-		}
-		ft_lstadd_back(&map, new);
-		lst = lst->next;
+		*node = new;
+		return ;
 	}
-	return (map);
+	last = ft_nodelast(*node);
+	new->next = 0;
+	last->next = new;
+	new->prev = last;
 }

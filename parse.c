@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 12:27:23 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:51:06 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,53 @@ char	*process_qoute(t_cmd *cmd, char *line)
 	return (sub_str);
 }
 
+int	process_pipe(t_cmd *cmd, t_node *node,char *line, char *save_str)
+{
+	char	*node_str;
+
+	if (save_str != NULL && *save_str != NULL)
+	{
+		node_str = ft_strdup(save_str);
+		ft_nodeadd_back(node, ft_nodenew((char *)node_str));
+		free(save_str);
+	}
+	node_str = ft_strdup("|");
+	ft_nodeadd_back(node, ft_nodenew((char *)node_str));
+	return (1);
+}
+
+int process_redir(t_cmd *cmd, t_node *node,char *line, char *save_str)
+{
+	char	*node_str;
+
+	if (save_str != NULL && *save_str != NULL)
+	{
+		node_str = ft_strdup(save_str);	
+		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
+		free(save_str);
+	}
+	if((*(line + 1) != 0 ) && *line == *(line + 1))
+	{
+		node_str = (char *)ft_calloc(3, sizeof(char));
+		node_str[0] = *line;
+		node_str[1] = *line;
+		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
+		return (2);
+	}
+	else
+	{
+		node_str = (char *)ft_calloc(2, sizeof(char));
+		node_str[0] = *line;
+		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
+		return (1);
+	}
+	return (0);
+}
+
+
 t_cmd	*parse_cmd(char *line)
 {
 	t_cmd	*cmd;
-	char	*pos;
 	t_node	*tmp_node;
 	char	*tmp_str;
 
@@ -70,17 +113,26 @@ t_cmd	*parse_cmd(char *line)
 	{
 		if(*line == ' ')
 			line++;
-		if(*line == '\'' || *line == '\"')
+		else if(*line == '\'' || *line == '\"')
 		{
 			tmp_str = process_qoute(cmd, line);
 			if (!tmp_str)
 				return (FAIL);
-			ft_nodeadd_back(&tmp_node, ft_nodenew((char *) tmp_str));
-			printf("SUB[%s]\n", tmp_str);
+			ft_nodeadd_back(&tmp_node, ft_nodenew((char *)tmp_str));
+			line += ft_strlen(tmp_str) + 1;
+			free(tmp_str);
 		}
-
+		else if(*line == '|' )
+			line += process_pipe(cmd, tmp_node, line, tmp_str);
+		else if(*line == '<' || *line == '>')
+			line += process_redir(cmd, tmp_node, line, tmp_str);
+		else
+		{
+			
+		}
+		line++;
 	}
-	
+	return (0);
 	
 	// if (check_space(line) == NULL)
 	// {

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nodeiter.c                                      :+:      :+:    :+:   */
+/*   ft_nodedelone.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/29 20:24:01 by suan              #+#    #+#             */
-/*   Updated: 2021/12/07 17:30:30 by sunbchoi         ###   ########.fr       */
+/*   Created: 2020/12/29 20:18:05 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:41:01 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
+#include "minishell.h"
 
-void	ft_nodeiter(t_node *node, void (*f)(void *))
+void	ft_nodedelone(t_node *node, void (*del)(void *))
 {
-	if (!node || !f)
+	if (!node || !del)
 		return ;
-	while (node)
-	{
-		f(node->contents);
-		node = node->next;
-	}
+	del(node->contents);
+	free(node);
 }
