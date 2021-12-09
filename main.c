@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/09 17:18:34 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/09 17:25:51 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	prompt(void)
 	char	*line;
 
 	// exit 입력하면 종료
-	while ((line = readline("minishell$ ")))
+	while ((line = readline("\033[34mminishell$ \033[0m")))
 	{
 		if (!check_space(line))
 		{
