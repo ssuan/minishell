@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/22 17:24:00 by suan              #+#    #+#             */
-/*   Updated: 2021/08/03 00:32:43 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/10 15:19:10 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ size_t				ft_strlcat(char *restrict dst, const char *restrict src,
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strnstr(const char *haystack,
 						const char *needle, size_t len);
 int					ft_isalpha(int c);

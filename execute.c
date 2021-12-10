@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/10 15:04:36 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/10 15:22:14 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,16 @@ int	non_builtin(char **cmdlines)
 
 int	builtin(char **cmdlines)
 {
-	ft_exit(cmdlines);
+	if (!ft_strcmp(cmdlines[0], "exit"))
+		ft_exit(cmdlines);
+	if (!ft_strcmp(cmdlines[0], "pwd"))
+		ft_pwd();
 	return (0);
 }
 
 int	is_builtin(char *cmd)
 {
-	if (ft_strncmp(cmd, "exit", 4) == 0)
+	if (!ft_strcmp(cmd, "exit") || !ft_strcmp(cmd, "pwd"))
 		return (TRUE);
 	return (FALSE);
 }
