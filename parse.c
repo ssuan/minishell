@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/10 19:24:58 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:30:54 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,9 @@ t_node	*parse_line(char *line)
 			{
 				tmp_str = ft_strdup(save_str);
 				ft_nodeadd_back(&tmp_node, ft_nodenew((char *)tmp_str));
-				tmp_str = ft_strchr(save_str, ' ');
-				if (tmp_str != NULL) // -> 에러 로직 변경 해야될 수도있음
-					printf("%s%s is not commad%s", COLOR_RED, save_str, COLOR_NORMAL);
+				// tmp_str = ft_strchr(save_str, ' ');
+				// if (tmp_str != NULL) // -> 에러 로직 변경 해야될 수도있음
+				// 	printf("%s%s is not commad%s", COLOR_RED, save_str, COLOR_NORMAL);
 				free(save_str);
 				save_str = 0;
 			}
