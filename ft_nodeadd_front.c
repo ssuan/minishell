@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_nodeadd_front.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 15:07:25 by suan              #+#    #+#             */
-/*   Updated: 2021/12/10 15:23:43 by suan             ###   ########.fr       */
+/*   Created: 2020/12/29 13:24:30 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:42:46 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(void)
+void	ft_nodeadd_front(t_node **node, t_node *new)
 {
-	char *pwd;
-
-	pwd = getcwd(NULL, 0);
-	ft_putstr_fd(pwd, 1);
-	ft_putchar_fd('\n', 1);
-	free(pwd);
-	return (0);
+	if (!node || !new)
+		return ;
+	new->next = *node;
+	new->prev = NULL;
+	(*node)->prev = new;
+	*node = new;
 }

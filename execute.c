@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-char	*find_value(char *key)
+char *find_value(char *key)
 {
-	int		i;
-	int		key_len;
+	int i;
+	int key_len;
 
 	i = 0;
 	key_len = ft_strlen(key);
@@ -28,13 +28,13 @@ char	*find_value(char *key)
 	return (NULL);
 }
 
-char	*find_path(char *cmd)
+char *find_path(char *cmd)
 {
-	char		**paths;
-	char		*path;
-	char		*temp;
-	int			i;
-	struct stat	s;
+	char **paths;
+	char *path;
+	char *temp;
+	int i;
+	struct stat s;
 
 	temp = find_value("PATH");
 	paths = ft_split(temp, ':');
@@ -54,23 +54,25 @@ char	*find_path(char *cmd)
 // 빌트인 함수 확인, 리다이렉트 처리, 리턴 값, 에러메시지 수정
 // int	execution(char **cmd)로 수정, split 함수 제거
 // 리턴 값
-int	non_builtin(char **cmdlines)
+int non_builtin(t_cmd *cmd)
 {
-	char	*path;
-	pid_t	pid;
-	pid_t	wpid;
+	char **cmdlines;
+	char *path;
+	pid_t pid;
+	pid_t wpid;
 	int ret;
 
 	pid = fork();
 	if (pid < -1)
 		return (-1);
-	path = find_path(cmdlines[0]);
+	path = find_path(cmd->node->str);
+	cmdlines = set_cmds(cmd);
 	if (pid == 0)
 	{
 		ret = execve(path, cmdlines, g_state.env);
 		if (ret == -1)
 		{
-			ft_putstr_fd(cmdlines[0], 2); // 에러메시지 수정
+			ft_putstr_fd(cmd->node->str, 2);		  // 에러메시지 수정
 			ft_putstr_fd(": command not found\n", 2); // 에러메시지 수정
 			exit(ret);
 		}
@@ -79,43 +81,41 @@ int	non_builtin(char **cmdlines)
 	{
 		wpid = waitpid(pid, NULL, 0);
 	}
+
+	// 함수로 빼기
+	int i = -1;
+	while (cmdlines[++i])
+		free(cmdlines[i]);
+	free(cmdlines);
 	return (0);
 }
 
-int	builtin(char **cmdlines)
+int builtin(t_cmd *cmd)
 {
-	if (!ft_strcmp(cmdlines[0], "exit"))
-		ft_exit(cmdlines);
-	if (!ft_strcmp(cmdlines[0], "pwd"))
+	if (!ft_strcmp(cmd->node->str, "exit"))
+		ft_exit(cmd);
+	if (!ft_strcmp(cmd->node->str, "pwd"))
 		ft_pwd();
 	return (0);
 }
 
-int	is_builtin(char *cmd)
+int is_builtin(t_cmd *cmd)
 {
-	if (!ft_strcmp(cmd, "exit") || !ft_strcmp(cmd, "pwd"))
+	if (!ft_strcmp(cmd->node->str, "exit") || !ft_strcmp(cmd->node->str, "pwd"))
 		return (TRUE);
 	return (FALSE);
 }
 
 // 빌트인 함수 확인, 리다이렉트 처리, 리턴 값, 에러메시지 수정
-int	execution(char *cmd)
+int execution(t_cmd *cmd)
 {
-	char	*path;
-	char	**cmdlines;
+	char *path;
 	int ret;
 
-	cmdlines = ft_split(cmd, ' ');
-	if (is_builtin(cmdlines[0]))
-		builtin(cmdlines);
+	if (is_builtin(cmd))
+		builtin(cmd);
 	else
-		non_builtin(cmdlines);
-	
-	// 나중에 없앨 부분
-	int i = -1;
-	while (cmdlines[++i])
-		free(cmdlines[i]);
-	free(cmdlines);
-	
+		non_builtin(cmd);
+
 	return (0); // 리턴 값
 }

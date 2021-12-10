@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_nodesize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 15:07:25 by suan              #+#    #+#             */
-/*   Updated: 2021/12/10 15:23:43 by suan             ###   ########.fr       */
+/*   Created: 2020/12/29 13:30:15 by suan              #+#    #+#             */
+/*   Updated: 2021/12/09 13:43:25 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(void)
+int	ft_nodesize(t_node *node)
 {
-	char *pwd;
+	int	size;
 
-	pwd = getcwd(NULL, 0);
-	ft_putstr_fd(pwd, 1);
-	ft_putchar_fd('\n', 1);
-	free(pwd);
-	return (0);
+	size = 0;
+	while (node)
+	{
+		++size;
+		node = node->next;
+	}
+	return (size);
 }

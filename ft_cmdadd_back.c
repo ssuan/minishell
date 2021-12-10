@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_cmdadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 15:07:25 by suan              #+#    #+#             */
-/*   Updated: 2021/12/10 15:23:43 by suan             ###   ########.fr       */
+/*   Created: 2020/12/29 20:15:06 by suan              #+#    #+#             */
+/*   Updated: 2021/12/10 17:14:53 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(void)
+void	ft_cmdadd_back(t_cmd **cmd, t_cmd *new)
 {
-	char *pwd;
+	t_cmd	*last;
 
-	pwd = getcwd(NULL, 0);
-	ft_putstr_fd(pwd, 1);
-	ft_putchar_fd('\n', 1);
-	free(pwd);
-	return (0);
+	if (!cmd || !new)
+		return ;
+	if (!*cmd)
+	{
+		*cmd = new;
+		return ;
+	}
+	last = ft_cmdlast(*cmd);
+	new->next = 0;
+	last->next = new;
+	new->prev = last;
 }

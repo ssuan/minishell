@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_cmdclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 15:07:25 by suan              #+#    #+#             */
-/*   Updated: 2021/12/10 15:23:43 by suan             ###   ########.fr       */
+/*   Created: 2020/12/29 20:19:48 by suan              #+#    #+#             */
+/*   Updated: 2021/12/10 17:15:17 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_pwd(void)
+void	ft_cmdclear(t_cmd **cmd, void (*del)(void *))
 {
-	char *pwd;
+	t_cmd	*curr;
+	t_cmd	*next;
 
-	pwd = getcwd(NULL, 0);
-	ft_putstr_fd(pwd, 1);
-	ft_putchar_fd('\n', 1);
-	free(pwd);
-	return (0);
+	if (!cmd || !del)
+		return ;
+	curr = *cmd;
+	while (curr)
+	{
+		next = curr->next;
+		ft_cmddelone(curr, del);
+		curr = next;
+	}
+	*cmd = 0;
 }
