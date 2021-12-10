@@ -6,12 +6,11 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/10 20:42:15 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/10 21:00:27 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 int cmd_connect_break(t_cmd *tcmd)
 {
 	int		loop;
@@ -31,6 +30,7 @@ int cmd_connect_break(t_cmd *tcmd)
 		cur_node->next = NULL;
 		cur_tcmd = cur_tcmd->next;
 	}
+	
 	return (0);
 }
 
@@ -42,7 +42,6 @@ int main(int argc, char **argv, char **envp)
 	t_cmd	*cur_tcmd;
 	t_node	*cur_node;
 	
-
 	initialize_data(argc, argv, envp);
 	line_node = parse_line("echo \" \"");
 	//print_node(line_node);
