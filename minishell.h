@@ -62,6 +62,7 @@ typedef struct s_state
 {
 	char **env;
 	int env_len;
+	int exit_status;
 } t_state;
 
 t_state g_state;
