@@ -20,5 +20,7 @@ int ft_pwd(void)
 	ft_putstr_fd(pwd, 1);
 	ft_putchar_fd('\n', 1);
 	free(pwd);
+	g_state.exit_status = 0;
+
 	return (0);
 }

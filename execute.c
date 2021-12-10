@@ -69,12 +69,12 @@ int non_builtin(t_cmd *cmd)
 	cmdlines = set_cmds(cmd);
 	if (pid == 0)
 	{
-		ret = execve(path, cmdlines, g_state.env);
-		if (ret == -1)
+		g_state.exit_status = execve(path, cmdlines, g_state.env);
+		if (g_state.exit_status == -1)
 		{
 			ft_putstr_fd(cmd->node->str, 2);		  // 에러메시지 수정
 			ft_putstr_fd(": command not found\n", 2); // 에러메시지 수정
-			exit(ret);
+			exit(g_state.exit_status);
 		}
 	}
 	if (pid != 0)
