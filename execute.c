@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 18:31:39 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/10 15:04:36 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ char	*find_path(char *cmd)
 
 // 빌트인 함수 확인, 리다이렉트 처리, 리턴 값, 에러메시지 수정
 // int	execution(char **cmd)로 수정, split 함수 제거
-int	execution(char *cmd)
+// 리턴 값
+int	non_builtin(char **cmdlines)
 {
 	char	*path;
-	char	**cmdlines;
 	pid_t	pid;
 	pid_t	wpid;
 	int ret;
@@ -64,9 +64,7 @@ int	execution(char *cmd)
 	pid = fork();
 	if (pid < -1)
 		return (-1);
-	cmdlines = ft_split(cmd, ' ');
 	path = find_path(cmdlines[0]);
-	ret = 0;
 	if (pid == 0)
 	{
 		ret = execve(path, cmdlines, g_state.env);
@@ -81,5 +79,40 @@ int	execution(char *cmd)
 	{
 		wpid = waitpid(pid, NULL, 0);
 	}
+	return (0);
+}
+
+int	builtin(char **cmdlines)
+{
+	ft_exit(cmdlines);
+	return (0);
+}
+
+int	is_builtin(char *cmd)
+{
+	if (ft_strncmp(cmd, "exit", 4) == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
+// 빌트인 함수 확인, 리다이렉트 처리, 리턴 값, 에러메시지 수정
+int	execution(char *cmd)
+{
+	char	*path;
+	char	**cmdlines;
+	int ret;
+
+	cmdlines = ft_split(cmd, ' ');
+	if (is_builtin(cmdlines[0]))
+		builtin(cmdlines);
+	else
+		non_builtin(cmdlines);
+	
+	// 나중에 없앨 부분
+	int i = -1;
+	while (cmdlines[++i])
+		free(cmdlines[i]);
+	free(cmdlines);
+	
 	return (0); // 리턴 값
 }

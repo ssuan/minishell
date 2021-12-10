@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/09 17:17:11 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/10 14:51:37 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ int		initialize_data(int argc, char **argv, char **envp);
 void	set_signal(void);
 int	check_space(char *s);
 int	execution(char *cmd);
+
+
+int ft_exit(char **s);
 
 #endif
