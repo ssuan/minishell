@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/10 20:57:31 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/10 21:23:52 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int     error(char *msg);
 int		initialize_data(int argc, char **argv, char **envp);
 t_node	*parse_line(char *line);
 t_cmd	*node_to_cmd(t_node *node);
+
+int cmd_space_check(t_cmd *tcmd);
 
 void	print_node(t_node *line_node);
 void	print_cmd(t_cmd *tcmd);
