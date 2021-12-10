@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/10 19:25:08 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:42:15 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int cmd_connect_break(t_cmd *tcmd)
 		cur_node->next = NULL;
 		cur_tcmd = cur_tcmd->next;
 	}
-	
 	return (0);
 }
 
