@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:07:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/10 18:51:26 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:26:54 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_node(t_node *line_node)
 		printf("node[%s]\n", cur_node->str);
 		cur_node = cur_node->prev;
 	}
-	printf("________________");
+	printf("________________\n");
 }
 	
 void	print_cmd(t_cmd *tcmd)

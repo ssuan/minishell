@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/10 21:23:52 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:32:45 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	set_signal(void);
 int	check_space(char *s);
 int	execution(char *cmd);
 
-
+int error_keep(char *msg);
 int ft_exit(char **s);
 
 #endif
