@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/12 20:32:45 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/12 21:38:14 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ t_state				g_state;
 
 int     error(char *msg);
 int		initialize_data(int argc, char **argv, char **envp);
-t_node	*parse_line(char *line);
 t_cmd	*node_to_cmd(t_node *node);
 
 int cmd_space_check(t_cmd *tcmd);
@@ -99,6 +98,10 @@ void				ft_cmdclear(t_cmd **cmd, void (*del)(void *));
 void				ft_cmditer(t_cmd *cmd, void (*f)(void *));
 t_cmd				*ft_cmdmap(t_cmd *cmd, void *(*f)(void *),
 						void (*del)(void *));
+
+/* parsing */
+t_node	*parse_line(char *line);
+int parse_space(char **line, char **save_str, t_node *line_node);
 
 void	set_signal(void);
 int	check_space(char *s);

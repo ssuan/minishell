@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/12 21:14:44 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/12 21:42:12 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv, char **envp)
 	t_node	*cur_node;
 	
 	initialize_data(argc, argv, envp);
-	line_node = parse_line("echo \" \"");
+	line_node = parse_line("echo \" \"  a sd bv ");
 	print_node(line_node);
 	//tcmd = node_to_cmd(line_node);
 	//cmd_connect_break(tcmd);
