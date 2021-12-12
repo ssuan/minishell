@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/12 21:51:37 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/13 01:31:00 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ t_node	*parse_line(char *line);
 int parse_space(char **line, char **save_str, t_node *line_node);
 int parse_qoute(char **line, char **save_str, t_node *line_node);
 int parse_pipe(char **line, char **save_str, t_node *line_node);
+int parse_redir(char **line, char **save_str, t_node *line_node);
+int	save_str_node(t_node *node, char **save_str);
+int save_str_join(char **line, char **save_str);
 
 void	set_signal(void);
 int	check_space(char *s);

@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:07:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/12 20:26:54 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/13 00:08:45 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_node(t_node *line_node)
 		if(cur_node != 0)
 		printf("node[%s]\n", cur_node->str);
 	}	
-	printf("-----PREV CHECK-------");
+	printf("-----PREV CHECK-------\n");
 	// NODE PREV
 	while (cur_node != 0)
 	{

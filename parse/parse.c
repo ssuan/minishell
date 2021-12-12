@@ -6,13 +6,13 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/12 21:54:03 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/13 01:31:33 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../minishell.h"
 
-int		check_syntax_space(char *line)
+int	check_syntax_space(char *line)
 {
 	int	space;
 	int	loop;
@@ -31,51 +31,37 @@ int		check_syntax_space(char *line)
 		loop++;
 	}
 	if (space == (int)ft_strlen(line))
-		return (FAIL); 
+		return (FAIL);
 	return (SUCCESS);
 }
 
-int	process_pipe(t_node *node,char *line, char *save_str)
+int	logic_specifi(char **line, char **save_str, t_node *line_node)
 {
-	char	*node_str;
-
-	if (save_str != NULL && *save_str != 0)
+	if ((**line == ' '
+			&& parse_space(line, save_str, line_node) == 0))
 	{
-		node_str = ft_strdup(save_str);
-		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
-		free(save_str);
+		error_keep("SPACE_ERROR\n");
+		return (FAIL);
 	}
-	node_str = ft_strdup("|");
-	ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
-	return (1);
-}
-
-int process_redir(t_node *node,char *line, char *save_str)
-{
-	char	*node_str;
-
-	if (save_str != NULL && *save_str != 0)
-	{
-		node_str = ft_strdup(save_str);	
-		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
-		free(save_str);
+	else if (**line == '|'
+		&& parse_pipe(line, save_str, line_node) == 0)
+	{	
+		error_keep("PIPE_ERROR\n");
+		return (FAIL);
 	}
-	if((*(line + 1) != 0 ) && *line == *(line + 1))
-	{
-		node_str = (char *)ft_calloc(3, sizeof(char));
-		node_str[0] = *line;
-		node_str[1] = *line;
-		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
-		return (2);
+	else if ((**line == '<' || **line == '>')
+		&& parse_redir(line, save_str, line_node) == 0)
+	{	
+		error_keep("REDIR_ERROR\n");
+		return (FAIL);
 	}
-	else
-	{
-		node_str = (char *)ft_calloc(2, sizeof(char));
-		node_str[0] = *line;
-		ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
-		return (1);
+	else if ((**line == '\'' || **line == '\"')
+		&& parse_qoute(line, save_str, line_node) == 0)
+	{	
+		error_keep("QOUTE_ERROR\n");
+		return (FAIL);
 	}
-	return (0);
+	return (SUCCESS);
 }
 
 t_node	*parse_line(char *line)
@@ -89,84 +75,57 @@ t_node	*parse_line(char *line)
 	tmp_node = (t_node *)ft_calloc(1, sizeof(t_node));
 	while (*line != 0)
 	{
-		if(*line == ' ')
-			parse_space(&line, &save_str, tmp_node);
-		else if(*line == '\'' || *line == '\"')
+		if (ft_strchr(" |\'\"<>", *line) != 0)
 		{	
-			if (parse_qoute(&line, &save_str, tmp_node) == 0)
-				printf("!");
-		}
-		else if(*line == '|' )
-		{
-			line += process_pipe(tmp_node, line, save_str);
-			save_str = 0;
-		}
-		else if(*line == '<' || *line == '>')
-		{
-			line += process_redir(tmp_node, line, save_str);
-			save_str = 0;
+			if (logic_specifi(&line, &save_str, tmp_node) == 0)
+				error_keep("KEEP ERROR");
 		}
 		else
-		{
-			if (save_str == NULL)
-				save_str = ft_strdup("");
-			free_str = save_str;
-			tmp_str = (char *)ft_calloc(2, sizeof(char));
-			tmp_str[0] = *line;
-			save_str = ft_strjoin(save_str, tmp_str);
-			line++;
-			free(free_str);
-			free(tmp_str);
-		}
+			save_str_join(&line, &save_str);
 	}
-	if (save_str != NULL && *save_str != 0)
-	{
-		tmp_str = ft_strdup(save_str);
-		ft_nodeadd_back(&tmp_node, ft_nodenew((char *)tmp_str));
-		free(save_str);
-	}
+	if (save_str_node(tmp_node, &save_str) == 0)
+		return (0);
 	return (tmp_node);
 }
 
-t_cmd	*node_to_cmd(t_node *node)
-{
-	t_cmd	*ret_tcmd;
-	t_cmd	*cur_tcmd;
-	t_cmd	*nxt_tcmd;
-	t_node	*cur_node;
-	t_node	*tmp_node;
-	
-	ret_tcmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	cur_tcmd = ret_tcmd;
-	cur_node = node->next;
-	while (cur_node != 0)
-	{
-		if (cur_tcmd->node == NULL)
-			cur_tcmd->node = cur_node;
-		if (ft_strchr(SPECIFIER, (int)cur_node->str[0]) != NULL)
-		{
-			if (cur_node->next != NULL)
-			{
-				//SPEC
-				nxt_tcmd = ft_cmdnew(NULL);
-				ft_cmdadd_back(&ret_tcmd, nxt_tcmd);
-				cur_tcmd = nxt_tcmd;
-				cur_tcmd->node = cur_node;
-				cur_tcmd->size = 1;
-				//NEW
-				nxt_tcmd = ft_cmdnew(NULL);
-				ft_cmdadd_back(&ret_tcmd, nxt_tcmd);
-				cur_tcmd = nxt_tcmd;			
-			}
-			else
-			{
-				printf("break\n");	
-				break ;
-			}
-		}
-		else
-			cur_tcmd->size++;
-		cur_node = cur_node->next;	
-	}
-	return (ret_tcmd);
-}
+// t_cmd	*node_to_cmd(t_node *node)
+// {
+// 	t_cmd	*ret_tcmd;
+// 	t_cmd	*cur_tcmd;
+// 	t_cmd	*nxt_tcmd;
+// 	t_node	*cur_node;
+// 	t_node	*tmp_node;
+
+// 	ret_tcmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
+// 	cur_tcmd = ret_tcmd;
+// 	cur_node = node->next;
+// 	while (cur_node != 0)
+// 	{
+// 		if (cur_tcmd->node == NULL)
+// 			cur_tcmd->node = cur_node;
+// 		if (ft_strchr(SPECIFIER, (int)cur_node->str[0]) != NULL)
+// 		{
+// 			if (cur_node->next != NULL)
+// 			{
+// 				nxt_tcmd = ft_cmdnew(NULL);
+// 				ft_cmdadd_back(&ret_tcmd, nxt_tcmd);
+// 				cur_tcmd = nxt_tcmd;
+// 				cur_tcmd->node = cur_node;
+// 				cur_tcmd->size = 1;
+				
+// 				nxt_tcmd = ft_cmdnew(NULL);
+// 				ft_cmdadd_back(&ret_tcmd, nxt_tcmd);
+// 				cur_tcmd = nxt_tcmd;			
+// 			}
+// 			else
+// 			{
+// 				printf("break\n");
+// 				break ;
+// 			}
+// 		}
+// 		else
+// 			cur_tcmd->size++;
+// 		cur_node = cur_node->next;
+// 	}
+// 	return (ret_tcmd);
+// }
