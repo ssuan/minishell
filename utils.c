@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/09 15:26:16 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/12 22:17:13 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_space(char *s)
 			space++;
 		i++;
 	}
-	if (space == (int)ft_strlen(s))
+	if (space == ft_strlen(s))
 		return (1);
 	return (0);
 }

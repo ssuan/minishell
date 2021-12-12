@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/12 23:04:52 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/12 22:10:42 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <signal.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include "./libft/libft.h"
-#include "./get_next_line/get_next_line.h"
+#include "../libft/libft.h"
+#include "../get_next_line/get_next_line.h"
 
 #define FAIL 0
 #define SUCCESS 1
@@ -101,7 +101,7 @@ t_cmd *ft_cmdmap(t_cmd *cmd, void *(*f)(void *),
 
 void set_signal(void);
 int check_space(char *s);
-void execution(t_cmd *cmd);
+int execution(t_cmd *cmd);
 
 char **set_cmds(t_cmd *cmd);
 
@@ -110,10 +110,5 @@ void	ft_pwd(void);
 
 
 char	*find_value(char *key);
-void	prompt(void);
-int cmd_connect_break(t_cmd *tcmd);
-
-int	free_split(char **s);
-char	*find_path(char *cmd);
 
 #endif

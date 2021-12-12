@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:54:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/12 20:56:27 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/12 22:04:34 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_digit(char *s)
 	return (TRUE);
 }
 
-int	ft_exit(t_cmd *cmd)
+void	ft_exit(t_cmd *cmd)
 {
 	if (cmd->size == 1)
 		g_state.exit_status = 0;
@@ -35,13 +35,15 @@ int	ft_exit(t_cmd *cmd)
 	{
 		ft_putstr_fd("numeric argument required\n", 2);
 		g_state.exit_status = -1;
+		return ;
 	}
 	else if (cmd->size > 2)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
 		g_state.exit_status = 1;
+		return ;
 	}
 	if (cmd->next && !ft_strcmp(cmd->next->node->str, "|"))
-		return (0);
+		return ;
 	exit(g_state.exit_status % 256);
 }
