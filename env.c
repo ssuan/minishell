@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 15:07:25 by suan              #+#    #+#             */
-/*   Updated: 2021/12/12 20:56:47 by suan             ###   ########.fr       */
+/*   Created: 2021/12/12 20:58:39 by suan              #+#    #+#             */
+/*   Updated: 2021/12/12 20:59:40 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(void)
+char	*find_value(char *key)
 {
-	char	*pwd;
+	int	i;
+	int	key_len;
 
-	pwd = getcwd(NULL, 0);
-	ft_putstr_fd(pwd, 1);
-	ft_putchar_fd('\n', 1);
-	free(pwd);
-	g_state.exit_status = 0;
-	return (0);
+	i = 0;
+	key_len = ft_strlen(key);
+	while (g_state.env[i] != 0)
+	{
+		if (!ft_strncmp(g_state.env[i], key, key_len))
+			return (g_state.env[i] + key_len + 1);
+		i++;
+	}
+	return (NULL);
 }

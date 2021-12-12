@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/10 15:12:00 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/12 20:59:48 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,8 @@ char **set_cmds(t_cmd *cmd);
 
 int ft_exit(t_cmd *cmd);
 int ft_pwd(void);
+
+
+char	*find_value(char *key);
 
 #endif
