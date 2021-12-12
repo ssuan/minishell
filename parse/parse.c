@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/12 21:42:35 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/12 21:54:03 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,6 @@ int		check_syntax_space(char *line)
 	if (space == (int)ft_strlen(line))
 		return (FAIL); 
 	return (SUCCESS);
-}
-
-char	*process_qoute(char *line)
-{
-	char	*pos;
-	int		str_len;
-	char	*sub_str;
-
-	pos = ft_strchr(line + 1, (int)*line);
-	if (pos == NULL)
-	{	
-		error_keep(STR_SINGLE_QUOTE_ERR);
-		return (0);
-	}
-	else
-	{
-		str_len = pos - (line + 1);	
-		sub_str = ft_substr(line + 1, 0, str_len);
-		if (sub_str == NULL)
-			return (FAIL);
-	}
-	return (sub_str);
 }
 
 int	process_pipe(t_node *node,char *line, char *save_str)
@@ -114,17 +92,9 @@ t_node	*parse_line(char *line)
 		if(*line == ' ')
 			parse_space(&line, &save_str, tmp_node);
 		else if(*line == '\'' || *line == '\"')
-		{
-			if (save_str == NULL)
-				save_str = ft_strdup("");
-			tmp_str = process_qoute(line);
-			if (!tmp_str)
-				return (FAIL);
-			free_str = save_str;
-			line += ft_strlen(tmp_str) + 1 + 1;
-			save_str = ft_strjoin(save_str, tmp_str);
-			free(tmp_str);
-			free(free_str);
+		{	
+			if (parse_qoute(&line, &save_str, tmp_node) == 0)
+				printf("!");
 		}
 		else if(*line == '|' )
 		{
