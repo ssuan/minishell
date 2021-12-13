@@ -6,14 +6,14 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:06:42 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 21:32:31 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 23:03:44 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // -nnnnn, -n -n 전부 허용
-int	check_opt_n(char *opt)
+static int	check_opt_n(char *opt)
 {
 	if (*opt && *opt == '-')
 		++opt;
@@ -29,7 +29,7 @@ int	check_opt_n(char *opt)
 	return (TRUE);
 }
 
-int	print_env(char *env)
+static int	print_env(char *env)
 {
 	char	*s;
 

@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/13 21:37:24 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 23:08:30 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,11 @@ char **set_cmds(t_cmd *cmd);
 void	ft_exit(t_cmd *cmd);
 void	ft_pwd(void);
 void    ft_echo(t_cmd *cmd);
-void	ft_env(void);
+void	ft_env(t_cmd *cmd);
+void	ft_export(t_cmd *cmd);
+void	ft_unset(t_cmd *cmd);
+
+void	print_export(void);
 
 char	*find_value(char *key);
 void	prompt(void);

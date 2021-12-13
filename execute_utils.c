@@ -6,22 +6,11 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:03:55 by suan              #+#    #+#             */
-/*   Updated: 2021/12/12 23:04:43 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:22:17 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	free_split(char **s)
-{
-	int	i;
-
-	i = -1;
-	while (s[++i])
-		free(s[i]);
-	free(s);
-	return (0);
-}
 
 char	*find_path(char *cmd)
 {

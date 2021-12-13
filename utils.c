@@ -6,11 +6,23 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/12 22:17:13 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:22:24 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// 2차원 배열 free
+int	free_split(char **s)
+{
+	int	i;
+
+	i = -1;
+	while (s[++i])
+		free(s[i]);
+	free(s);
+	return (0);
+}
 
 int	check_space(char *s)
 {

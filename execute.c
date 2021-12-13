@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 21:37:34 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 23:08:47 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ void	builtin(t_cmd *cmd)
 	if (!ft_strcmp(cmd->node->str, "echo"))
 		ft_echo(cmd);
 	if (!ft_strcmp(cmd->node->str, "env"))
-		ft_env();
+		ft_env(cmd);
+	if (!ft_strcmp(cmd->node->str, "export"))
+		ft_export(cmd);
+	if (!ft_strcmp(cmd->node->str, "unset"))
+		ft_unset(cmd);
 }
 
 int	is_builtin(t_cmd *cmd)
@@ -60,7 +64,9 @@ int	is_builtin(t_cmd *cmd)
 	if (!ft_strcmp(cmd->node->str, "exit")
 		|| !ft_strcmp(cmd->node->str, "pwd")
 		|| !ft_strcmp(cmd->node->str, "echo")
-		|| !ft_strcmp(cmd->node->str, "env"))
+		|| !ft_strcmp(cmd->node->str, "env")
+		|| !ft_strcmp(cmd->node->str, "export")
+		|| !ft_strcmp(cmd->node->str, "unset"))
 		return (TRUE);
 	return (FALSE);
 }

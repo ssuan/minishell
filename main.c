@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/13 01:08:32 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 22:31:11 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int cmd_connect_break(t_cmd *tcmd)
 	return (0);
 }
 
+// $ 처리(환경변수)
+// 수정 끝나면 echo $ 부분 수정하기
 int main(int argc, char **argv, char **envp)
 {
 	rl_catch_signals = 0;
