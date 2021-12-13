@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/13 02:15:24 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/13 20:11:55 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,45 +89,4 @@ t_node	*parse_line(char *line)
 	if (save_str_node(tmp_node, &save_str) == 0)
 		return (0);
 	return (tmp_node);
-}
-
-t_cmd	*node_to_cmd(t_node *node)
-{
-	t_cmd	*ret_tcmd;
-	t_cmd	*cur_tcmd;
-	t_cmd	*nxt_tcmd;
-	t_node	*cur_node;
-	t_node	*tmp_node;
-
-	ret_tcmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
-	cur_tcmd = ret_tcmd;
-	cur_node = node->next;
-	while (cur_node != 0)
-	{
-		if (cur_tcmd->node == NULL)
-			cur_tcmd->node = cur_node;
-		if (ft_strchr(SPECIFIER, (int)cur_node->str[0]) != NULL)
-		{
-			if (cur_node->next != NULL)
-			{
-				nxt_tcmd = ft_cmdnew(NULL);
-				ft_cmdadd_back(&ret_tcmd, nxt_tcmd);
-				cur_tcmd = nxt_tcmd;
-				cur_tcmd->node = cur_node;
-				cur_tcmd->size = 1;				
-				nxt_tcmd = ft_cmdnew(NULL);
-				ft_cmdadd_back(&ret_tcmd, nxt_tcmd);
-				cur_tcmd = nxt_tcmd;			
-			}
-			else
-			{
-				printf("break\n");
-				break ;
-			}
-		}
-		else
-			cur_tcmd->size++;
-		cur_node = cur_node->next;
-	}
-	return (ret_tcmd);
 }

@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:41:08 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/13 01:31:23 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:58:51 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	save_str_node(t_node *node, char **save_str)
 	return (SUCCESS);
 }
 
-int save_str_join(char **line, char **save_str)
+int	save_str_join(char **line, char **save_str)
 {
 	char	*free_str;
 	char	*tmp_str;
