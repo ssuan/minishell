@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/12 22:58:36 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 01:08:32 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,5 @@ int main(int argc, char **argv, char **envp)
 	prompt();
 	return (0);
 }
+
+// cd pwd export unset env exit

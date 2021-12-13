@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:06:42 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 01:05:04 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 21:32:31 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,23 @@ int	print_env(char *env)
 	if (*env != '$')
 		return (FAIL);
 	++env;
-	if (*env == '?')
+	if (!*env)
 	{
-		ft_putnbr_fd(g_state.exit_status, 1);
+		ft_putstr_fd("$", 1);
+		return (SUCCESS);
+	}
+	if (ft_strchr("0123456789?", *env))
+	{
+		if (*env == '?')
+			ft_putnbr_fd(g_state.exit_status, 1);
+		if (*env == '0')
+			ft_putstr_fd("minishell", 1);
+		ft_putstr_fd(env + 1, 1);
 		return (SUCCESS);
 	}
 	s = find_value(env);
-	if (s == NULL)
-		return (FAIL);
-	ft_putstr_fd(s, 1);
+	if (s != NULL)
+		ft_putstr_fd(s, 1);
 	return (SUCCESS);
 }
 
