@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 00:20:24 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/13 21:37:34 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,16 @@ void	builtin(t_cmd *cmd)
 		ft_pwd();
 	if (!ft_strcmp(cmd->node->str, "echo"))
 		ft_echo(cmd);
+	if (!ft_strcmp(cmd->node->str, "env"))
+		ft_env();
 }
 
 int	is_builtin(t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->node->str, "exit")
 		|| !ft_strcmp(cmd->node->str, "pwd")
-		|| !ft_strcmp(cmd->node->str, "echo"))
+		|| !ft_strcmp(cmd->node->str, "echo")
+		|| !ft_strcmp(cmd->node->str, "env"))
 		return (TRUE);
 	return (FALSE);
 }
