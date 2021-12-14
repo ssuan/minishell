@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:07:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/10 18:51:26 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:36:40 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// set_cmds: exec utils			in print_node.c
-char **set_cmds(t_cmd *cmd)
-{
-	t_node *cur_node;
-	char **cmds;
-	int i;
-
-	// calloc으로 고치기
-	cmds = (char **)malloc(sizeof(char *) * cmd->size + 1);
-	if (!cmds)
-		return (NULL);
-	cur_node = cmd->node;
-	i = 0;
-	while (cur_node != 0)
-	{
-		cmds[i] = cur_node->str;
-		cur_node = cur_node->next;
-		i++;
-	}
-	cmds[i] = 0;
-	return (cmds);
-}
 
 void print_node(t_node *line_node)
 {

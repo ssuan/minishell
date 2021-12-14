@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 16:18:04 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 18:08:18 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // 변수 이름은 알파벳(대,소 구분), 숫자, _로 만들 수 있다.
 // 첫 문자로 숫자가 올 수 없다.
-int	check_key(char *key)
+static int	check_key(char *key)
 {
 	int	i;
 
@@ -32,7 +32,11 @@ int	check_key(char *key)
 
 // 이차원 배열에 배열 하나만 추가하는 방법이 있나???
 // 환경변수 파싱할때 크게 메모리 할당하기?
-void	unset_env(char *new)
+
+// find_key 변수 만들기?
+// 아니면 len 변수 없애기??
+// line 수 줄이기
+static void	unset_env(char *key)
 {
 	char	**temp;
 	int		flag;
@@ -43,13 +47,13 @@ void	unset_env(char *new)
 	temp = (char **)ft_calloc(g_state.env_len + 1, sizeof(char *));
 	if (temp == NULL)
 		return ;
-	i = 0;
+	i = -1;
 	idx = 0;
 	flag = 0;
-	len = ft_strlen(new);
-	while (i < g_state.env_len)
+	len = ft_strlen(key);
+	while (++i < g_state.env_len)
 	{
-		if (!ft_strncmp(new, g_state.env[i], len))
+		if (!ft_strncmp(key, g_state.env[i], len))
 			flag++;
 		else
 		{
@@ -58,7 +62,6 @@ void	unset_env(char *new)
 				return ;
 			idx++;
 		}
-		i++;
 	}
 	free(g_state.env);
 	g_state.env = temp;

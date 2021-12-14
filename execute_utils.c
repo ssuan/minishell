@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:03:55 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:22:17 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:38:16 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,24 @@ char	*find_path(char *cmd)
 	}
 	free_split(paths);
 	return (ft_strdup(cmd));
+}
+
+char	**set_cmds(t_cmd *cmd)
+{
+	t_node	*cur_node;
+	char	**cmds;
+	int		i;
+
+	cmds = ft_calloc(sizeof(char *), cmd->size + 1);
+	if (!cmds)
+		return (NULL);
+	cur_node = cmd->node;
+	i = 0;
+	while (cur_node != 0)
+	{
+		cmds[i] = cur_node->str;
+		cur_node = cur_node->next;
+		i++;
+	}
+	return (cmds);
 }

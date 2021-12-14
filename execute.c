@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 16:18:53 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 18:01:18 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	builtin(t_cmd *cmd)
 		g_state.exit_status = ft_export(cmd);
 	if (!ft_strcmp(cmd->node->str, "unset"))
 		g_state.exit_status = ft_unset(cmd);
+	if (!ft_strcmp(cmd->node->str, "cd"))
+		g_state.exit_status = ft_cd(cmd);
 }
 
 int	is_builtin(t_cmd *cmd)
@@ -66,7 +68,8 @@ int	is_builtin(t_cmd *cmd)
 		|| !ft_strcmp(cmd->node->str, "echo")
 		|| !ft_strcmp(cmd->node->str, "env")
 		|| !ft_strcmp(cmd->node->str, "export")
-		|| !ft_strcmp(cmd->node->str, "unset"))
+		|| !ft_strcmp(cmd->node->str, "unset")
+		|| !ft_strcmp(cmd->node->str, "cd"))
 		return (TRUE);
 	return (FALSE);
 }
