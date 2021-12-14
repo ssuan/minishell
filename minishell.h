@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/14 18:14:45 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 18:42:58 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,7 @@ char	*find_path(char *cmd);
 char	*get_key(char *str);
 char	*get_value(char *str);
 void	env_update(char *key, char *value);
+
+void    dollor_to_env(t_cmd *cmd);
 
 #endif
