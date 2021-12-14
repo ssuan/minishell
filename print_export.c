@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 22:12:25 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 23:05:53 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:08:21 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	print_export(void)
 {
 	int		i;
 	char	**env;
-	char	**split;
+	char	*key;
+	char	*value;
 
 	env = copy_env();
 	sort_env(&env);
@@ -68,15 +69,15 @@ void	print_export(void)
 	{
 		if (ft_strchr(env[i], '='))
 		{
-			split = ft_split(env[i], '=');
+			key = get_key(env[i]);
+			value = get_value(env[i]);
 			ft_putstr_fd("declare -x ", 1);
-			ft_putstr_fd(split[0], 1);
-			ft_putchar_fd('=', 1);
-			ft_putchar_fd('\"', 1);
-			ft_putstr_fd(split[1], 1);
-			ft_putchar_fd('\"', 1);
-			ft_putchar_fd('\n', 1);
-			free_split(split);
+			ft_putstr_fd(key, 1);
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd(value, 1);
+			ft_putstr_fd("\"\n", 1);
+			free(key);
+			free(value);
 		}
 		i++;
 	}

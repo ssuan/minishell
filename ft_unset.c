@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 00:01:12 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:18:04 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,51 +50,44 @@ void	unset_env(char *new)
 	while (i < g_state.env_len)
 	{
 		if (!ft_strncmp(new, g_state.env[i], len))
-		{
 			flag++;
-			i++;
-		}
 		else
 		{
 			temp[idx] = ft_strdup(g_state.env[i]);
 			if (temp[idx] == NULL)
 				return ;
-			i++;
 			idx++;
 		}
+		i++;
 	}
 	free(g_state.env);
 	g_state.env = temp;
 	g_state.env_len -= flag;
 }
 
-void	ft_unset(t_cmd *cmd)
+// err msg
+// bash: export: `1': not a valid identifier
+int	ft_unset(t_cmd *cmd)
 {
 	t_node	*curr;
 	char	**split;
 
 	if (cmd->size == 1)
-	{
-		g_state.exit_status = 0;
-		return ;
-	}
+		return (0);
 	else
 	{
 		curr = cmd->node->next;
 		while (curr)
 		{
-			// bash: export: `1': not a valid identifier
 			if (!check_key(curr->str))
 			{
 				printf("minishell: unset: not a valid identifier\n");
-				g_state.exit_status = 1;
-				return ;
+				return (1);
 			}
 			else
 				unset_env(curr->str);
 			curr = curr->next;
 		}
 	}
-	g_state.exit_status = 0;
-	return ;
+	return (0);
 }

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/13 22:31:11 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:25:26 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int cmd_connect_break(t_cmd *tcmd)
+int	cmd_connect_break(t_cmd *tcmd)
 {
-	int loop;
-	t_node *cur_node;
-	t_cmd *cur_tcmd;
+	int		loop;
+	t_node	*cur_node;
+	t_cmd	*cur_tcmd;
 
 	cur_tcmd = tcmd;
 	while (cur_tcmd != NULL)
@@ -36,10 +36,13 @@ int cmd_connect_break(t_cmd *tcmd)
 
 // $ 처리(환경변수)
 // 수정 끝나면 echo $ 부분 수정하기
-int main(int argc, char **argv, char **envp)
+
+// rl_catch_signals = 0;
+// If this variable is non-zero, Readline will install signal handlers for
+// SIGINT, SIGQUIT, SIGTERM, SIGHUP, SIGALRM, SIGTSTP, SIGTTIN, and SIGTTOU.	
+int	main(int argc, char **argv, char **envp)
 {
 	rl_catch_signals = 0;
-	// If this variable is non-zero, Readline will install signal handlers for SIGINT, SIGQUIT, SIGTERM, SIGHUP, SIGALRM, SIGTSTP, SIGTTIN, and SIGTTOU.
 	set_signal();
 	initialize_data(argc, argv, envp);
 	prompt();

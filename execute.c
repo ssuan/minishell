@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 23:08:47 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:18:53 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ void	builtin(t_cmd *cmd)
 	if (!ft_strcmp(cmd->node->str, "exit"))
 		ft_exit(cmd);
 	if (!ft_strcmp(cmd->node->str, "pwd"))
-		ft_pwd();
+		g_state.exit_status = ft_pwd();
 	if (!ft_strcmp(cmd->node->str, "echo"))
-		ft_echo(cmd);
+		g_state.exit_status = ft_echo(cmd);
 	if (!ft_strcmp(cmd->node->str, "env"))
-		ft_env(cmd);
+		g_state.exit_status = ft_env(cmd);
 	if (!ft_strcmp(cmd->node->str, "export"))
-		ft_export(cmd);
+		g_state.exit_status = ft_export(cmd);
 	if (!ft_strcmp(cmd->node->str, "unset"))
-		ft_unset(cmd);
+		g_state.exit_status = ft_unset(cmd);
 }
 
 int	is_builtin(t_cmd *cmd)
@@ -80,5 +80,4 @@ void	execution(t_cmd *cmd)
 		builtin(cmd);
 	else
 		non_builtin(cmd);
-//	printf("%d\n", g_state.exit_status);
 }

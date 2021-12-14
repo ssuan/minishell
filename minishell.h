@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/13 23:08:30 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:18:37 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ void execution(t_cmd *cmd);
 char **set_cmds(t_cmd *cmd);
 
 void	ft_exit(t_cmd *cmd);
-void	ft_pwd(void);
-void    ft_echo(t_cmd *cmd);
-void	ft_env(t_cmd *cmd);
-void	ft_export(t_cmd *cmd);
-void	ft_unset(t_cmd *cmd);
+int	ft_pwd(void);
+int	ft_echo(t_cmd *cmd);
+int	ft_env(t_cmd *cmd);
+int	ft_export(t_cmd *cmd);
+int	ft_unset(t_cmd *cmd);
 
 void	print_export(void);
 
@@ -120,5 +120,8 @@ int cmd_connect_break(t_cmd *tcmd);
 
 int	free_split(char **s);
 char	*find_path(char *cmd);
+
+char	*get_key(char *str);
+char	*get_value(char *str);
 
 #endif

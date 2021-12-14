@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:54:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/13 22:34:25 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:23:41 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ft_exit(t_cmd *cmd)
 		g_state.exit_status = 1;
 		return ;
 	}
-	// pwd, echo, env 등등 모두 | 앞에서 실행 x -> |에서 처리하기
 	if (cmd->next && !ft_strcmp(cmd->next->node->str, "|"))
 		return ;
 	exit(g_state.exit_status % 256);

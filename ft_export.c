@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:56:14 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 00:01:59 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/14 16:24:08 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ static void	set_env(char *new)
 	g_state.env_len += 1;
 }
 
-void	ft_export(t_cmd *cmd)
+// err msg
+// bash: export: `1': not a valid identifier
+int	ft_export(t_cmd *cmd)
 {
 	t_node	*curr;
 	char	**split;
@@ -88,20 +90,15 @@ void	ft_export(t_cmd *cmd)
 		curr = cmd->node->next;
 		while (curr)
 		{
-			// bash: export: `1': not a valid identifier
 			if (!check_key(curr->str))
 			{
 				printf("minishell: export: not a valid identifier\n");
-				g_state.exit_status = 1;
-				return ;
+				return (1);
 			}
 			else
 				set_env(curr->str);
 			curr = curr->next;
 		}
 	}
-
-	printf("%d\n", g_state.env_len);
-	g_state.exit_status = 0;
-	return ;
+	return (0);
 }
