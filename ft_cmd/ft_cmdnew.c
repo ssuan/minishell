@@ -16,7 +16,7 @@ t_cmd	*ft_cmdnew(void *content)
 {
 	t_cmd	*new;
 
-	new = (t_cmd *)malloc(sizeof(t_cmd));
+	new = (t_cmd *)ft_calloc(sizeof(t_cmd), 1);
 	if (!new)
 		return (0);
 	new->node = content;

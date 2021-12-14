@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:07:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/13 00:08:45 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:19:34 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	print_node(t_node *line_node)
 	{
 		cur_node = cur_node->next;
 		if(cur_node != 0)
-		printf("node[%s]\n", cur_node->str);
+		printf(" [%s] ", cur_node->str);
 	}	
-	printf("-----PREV CHECK-------\n");
+	printf("\n-----PREV CHECK-------\n");
 	// NODE PREV
 	while (cur_node != 0)
 	{
 		if(cur_node != 0)
-		printf("node[%s]\n", cur_node->str);
+		printf(" [%s] ", cur_node->str);
 		cur_node = cur_node->prev;
 	}
-	printf("________________\n");
+	printf("\n ________________\n");
 }
 	
 void	print_cmd(t_cmd *tcmd)
