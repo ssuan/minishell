@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:44:16 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 15:57:11 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	prompt(void)
  			//print_cmd(tcmd);
 			add_history(line);
 			execution(tcmd);
-			system("leaks minishell");
+			//system("leaks minishell");
 			//free_cmd(tcmd);
 		}
 		//free(line);
