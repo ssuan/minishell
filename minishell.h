@@ -21,7 +21,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include "./libft/libft.h"
-#include "./get_next_line/get_next_line.h"
 
 #define FAIL 0
 #define SUCCESS 1
@@ -105,27 +104,27 @@ void execution(t_cmd *cmd);
 
 char **set_cmds(t_cmd *cmd);
 
-void	ft_exit(t_cmd *cmd);
-int	ft_pwd(void);
-int	ft_echo(t_cmd *cmd);
-int	ft_env(t_cmd *cmd);
-int	ft_export(t_cmd *cmd);
-int	ft_unset(t_cmd *cmd);
-int	ft_cd(t_cmd *cmd);
+void ft_exit(t_cmd *cmd);
+int ft_pwd(void);
+int ft_echo(t_cmd *cmd);
+int ft_env(t_cmd *cmd);
+int ft_export(t_cmd *cmd);
+int ft_unset(t_cmd *cmd);
+int ft_cd(t_cmd *cmd);
 
-void	print_export(void);
+void print_export(void);
 
-char	*find_value(char *key);
-void	prompt(void);
+char *find_value(char *key);
+void prompt(void);
 int cmd_connect_break(t_cmd *tcmd);
 
-int	free_split(char **s);
-char	*find_path(char *cmd);
+int free_split(char **s);
+char *find_path(char *cmd);
 
-char	*get_key(char *str);
-char	*get_value(char *str);
-void	env_update(char *key, char *value);
+char *get_key(char *str);
+char *get_value(char *str);
+void env_update(char *key, char *value);
 
-void    dollor_to_env(t_cmd *cmd);
+void dollor_to_env(t_cmd *cmd);
 
 #endif

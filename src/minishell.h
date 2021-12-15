@@ -21,7 +21,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include "../libft/libft.h"
-#include "../get_next_line/get_next_line.h"
 
 #define FAIL 0
 #define SUCCESS 1
@@ -105,10 +104,9 @@ int execution(t_cmd *cmd);
 
 char **set_cmds(t_cmd *cmd);
 
-void	ft_exit(t_cmd *cmd);
-void	ft_pwd(void);
+void ft_exit(t_cmd *cmd);
+void ft_pwd(void);
 
-
-char	*find_value(char *key);
+char *find_value(char *key);
 
 #endif

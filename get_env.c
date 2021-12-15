@@ -15,50 +15,52 @@
 static int	get_env(char **str)
 {
 	char	*s;
-    char    *tmp;
+	char	*tmp;
+	int		i;
 
-    //if (**str == '~') 추가
+	// if (**str == '~') 추가
 
-	if (**str != '$')
+	i = 0;
+	if (*str[i] != '$')
 		return (FAIL);
-    s = NULL;
-    (*str)++;
-	if (**str == '\0')
+	s = NULL;
+	i++;
+	if (*str[i] == '\0')
 		return (FAIL);
-	if (ft_strchr("0123456789?", **str))
+	if (ft_strchr("0123456789?", *str[i]))
 	{
-		if (**str == '?')
-            s = ft_itoa(g_state.exit_status);
-		if (**str == '0')
-            s = ft_strdup("minishell");
-        if (s == NULL)
-            s = ft_strdup("");
-        (*str)++;
-        tmp = ft_strjoin(s, *str);
-        free(*str); // free 제대로 안됨-> 인덱스로 수정
-        free(s);
-        *str = tmp;
+		if (*str[i] == '?')
+			s = ft_itoa(g_state.exit_status);
+		if (*str[i] == '0')
+			s = ft_strdup("minishell");
+		if (s == NULL)
+			s = ft_strdup("");
+		i++;
+		tmp = ft_strjoin(s, *str);
+		//free(*str); // free 제대로 안됨-> 인덱스로 수정
+		free(s);
+		*str = tmp;
 		return (SUCCESS);
 	}
 	s = find_value(*str);
-    printf("#%s\n", s);
-    if (s == NULL)
-        s = ft_strdup("");
-    //free(*str);
-    *str = s;
+	printf("#%s\n", s);
+	if (s == NULL)
+		s = ft_strdup("");
+	//free(*str);
+	*str = s;
 	return (SUCCESS);
 }
 
-void    dollor_to_env(t_cmd *cmd)
+void dollor_to_env(t_cmd *cmd)
 {
-	t_node	*curr;
+	t_node *curr;
 
 	curr = cmd->node;
 	while (curr)
 	{
-        printf("%s\n", curr->str);
-        get_env(&(curr->str));
-        printf("%s\n", curr->str);
+		printf("%s\n", curr->str);
+		get_env(&(curr->str));
+		printf("%s\n", curr->str);
 		curr = curr->next;
 	}
 }
