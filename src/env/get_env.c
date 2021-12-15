@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:28:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 19:05:38 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:34:36 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	get_env_value(char **str)
 		*str = tmp;
 		return (SUCCESS);
 	}
-	s = find_value(*str + i);
+	s = ft_strdup(find_value(*str + i));
 	if (s == NULL)
 		s = ft_strdup("");
 	free(*str);
