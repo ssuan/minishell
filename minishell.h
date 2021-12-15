@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/14 18:42:58 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 14:28:01 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ typedef struct s_state
 
 t_state g_state;
 
-int error(char *msg);
-int initialize_data(int argc, char **argv, char **envp);
-t_node *parse_line(char *line);
-t_cmd *node_to_cmd(t_node *node);
+int     error(char *msg);
+int		initialize_data(int argc, char **argv, char **envp);
+t_cmd	*node_to_cmd(t_node *node);
 
-void print_node(t_node *line_node);
-void print_cmd(t_cmd *tcmd);
+int cmd_space_check(t_cmd *tcmd);
+
+void	print_node(t_node *line_node);
+void	print_cmd(t_cmd *tcmd);
 
 /* NODE */
 t_node *ft_nodenew(void *content);
@@ -98,6 +99,7 @@ void ft_cmditer(t_cmd *cmd, void (*f)(void *));
 t_cmd *ft_cmdmap(t_cmd *cmd, void *(*f)(void *),
 				 void (*del)(void *));
 
+
 void set_signal(void);
 int check_space(char *s);
 void execution(t_cmd *cmd);
@@ -116,7 +118,6 @@ void print_export(void);
 
 char *find_value(char *key);
 void prompt(void);
-int cmd_connect_break(t_cmd *tcmd);
 
 int free_split(char **s);
 char *find_path(char *cmd);
@@ -127,4 +128,20 @@ void env_update(char *key, char *value);
 
 void dollor_to_env(t_cmd *cmd);
 
+/* parsing */
+t_node	*parse_line(char *line);
+int parse_space(char **line, char **save_str, t_node *line_node);
+int parse_qoute(char **line, char **save_str, t_node *line_node);
+int parse_pipe(char **line, char **save_str, t_node *line_node);
+int parse_redir(char **line, char **save_str, t_node *line_node);
+int	save_str_node(t_node *node, char **save_str);
+int save_str_join(char **line, char **save_str);
+int	free_node(t_node *node);
+int	free_cmd(t_cmd *tcmd);
+t_cmd	*parsing(char *line);
+int cmd_connect_break(t_cmd *tcmd);
+void	set_signal(void);
+int	check_space(char *s);
+
+int error_keep(char *msg);
 #endif

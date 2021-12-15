@@ -6,33 +6,11 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/14 16:25:26 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 14:29:02 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	cmd_connect_break(t_cmd *tcmd)
-{
-	int		loop;
-	t_node	*cur_node;
-	t_cmd	*cur_tcmd;
-
-	cur_tcmd = tcmd;
-	while (cur_tcmd != NULL)
-	{
-		loop = 0;
-		cur_node = cur_tcmd->node;
-		cur_node->prev = NULL;
-		while (loop++ < cur_tcmd->size - 1)
-		{
-			cur_node = cur_node->next;
-		}
-		cur_node->next = NULL;
-		cur_tcmd = cur_tcmd->next;
-	}
-	return (0);
-}
 
 // $ 처리(환경변수)
 // 수정 끝나면 echo $ 부분 수정하기
