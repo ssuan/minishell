@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:18:44 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:50:29 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ void	non_builtin(t_cmd *cmd)
 	char	**cmdlines;
 	char	*path;
 	int		status;
+	int		ret;
 
 	pid = fork();
 	if (pid < -1)
 		return ;
-	path = find_path(cmd->node->str);
-	cmdlines = set_cmds(cmd);
 	if (pid == 0)
 	{
-		if (execve(path, cmdlines, g_state.env) == -1)
+		path = find_path(cmd->node->str);
+		cmdlines = set_cmds(cmd);
+		ret = execve(path, cmdlines, g_state.env);
+		free(path);
+		free(cmdlines);
+		if (ret == -1)
 		{
 			ft_putstr_fd(cmd->node->str, 2);
 			ft_putstr_fd(": command not found\n", 2);
-			free(path);
-			free(cmdlines);
 			exit(127);
-		}
-		free(path);
-		free(cmdlines);
+		}		
 	}
 	while (waitpid(-1, &status, 0) > 0)
 	{
