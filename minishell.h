@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/15 18:47:17 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 02:16:44 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <errno.h>
 # include "./libft/libft.h"
 
 # define FAIL 0
@@ -68,7 +69,6 @@ typedef struct s_state
 t_state	g_state;
 
 int		error(char *msg);
-int		initialize_data(int argc, char **argv, char **envp);
 t_cmd	*node_to_cmd(t_node *node);
 
 int		cmd_space_check(t_cmd *tcmd);
@@ -120,13 +120,18 @@ int		ft_unset(t_cmd *cmd);
 int		ft_cd(t_cmd *cmd);
 
 /* env */
+int		init_env(int argc, char **argv, char **envp);
+void	get_env(t_cmd *cmd);
+char	*find_value(char *key);
 char	*get_key(char *str);
 char	*get_value(char *str);
 void	env_update(char *key, char *value);
-void	get_env(t_cmd *cmd);
-char	*find_value(char *key);
 
-void	execution(t_cmd *cmd);
+/* execute */
+void	execute(t_cmd *cmd);
+int		is_builtin(t_cmd *cmd);
+void	builtin(t_cmd *cmd);
+void	non_builtin(t_cmd *cmd);
 
 /* parsing */
 t_node	*parse_line(char *line);
@@ -143,5 +148,10 @@ int		cmd_connect_break(t_cmd *tcmd);
 void	set_signal(void);
 int		check_space(char *s);
 
+/* error */
+void	print_error(char *command, char *msg);
+void	print_error_exit(char *command, char *msg, int exit_status);
+void	print_error2(char *command, char *input, char *msg);
+void	print_error3(char *command, char *input, char *msg);
 int		error_keep(char *msg);
 #endif

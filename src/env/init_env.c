@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:16:32 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/07 15:11:28 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/16 01:45:46 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	env_seting(char **envp)
 	return (SUCCESS);
 }
 
-int	initialize_data(int argc, char **argv, char **envp)
+int	init_env(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	(void)argv;

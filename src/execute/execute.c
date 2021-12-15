@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_space_check.c                                  :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 21:23:01 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/15 16:56:00 by suan             ###   ########.fr       */
+/*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
+/*   Updated: 2021/12/16 02:16:53 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	cmd_space_check(t_cmd *tcmd)
+// 파이프, 리다이렉션 처리
+void	execute(t_cmd *cmd)
 {
-	t_cmd	*cur_cmd;
-	char	*str;
-	char	*check;
+	char	*path;
+	int		ret;
 
-	cur_cmd = tcmd;
-	while (cur_cmd != NULL)
-	{
-		str = cur_cmd->node->str;
-		check = ft_strchr(str, ' ');
-		if (check != NULL)
-		{
-			printf("%sspace error%s\n", COLOR_RED, COLOR_NORMAL);
-			return (FAIL);
-		}
-		cur_cmd = cur_cmd->next;
-	}
-	return (SUCCESS);
+	if (is_builtin(cmd))
+		builtin(cmd);
+	else
+		non_builtin(cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:56:14 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:23:13 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 01:28:10 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 // 변수 이름은 알파벳(대,소 구분), 숫자, _로 만들 수 있다.
 // 첫 문자로 숫자가 올 수 없다.
-// static? 또는 unset과 공유?
 static int	is_valid_key(char *key)
 {
 	int	i;
@@ -31,7 +30,7 @@ static int	is_valid_key(char *key)
 	return (TRUE);
 }
 
-static int	duplicate(char *str)
+static int	is_key_exist(char *str)
 {
 	int	i;
 	int	key_len;
@@ -72,9 +71,6 @@ static void	update_value(char *new)
 	return ;
 }
 
-// 이차원 배열에 배열 하나만 추가하는 방법이 있나???
-// env 배열 크게 할당하기?
-// 키가 중복할 경우 수정하기
 static void	set_env(char *new)
 {
 	char	**temp;
@@ -82,7 +78,7 @@ static void	set_env(char *new)
 
 	if (!ft_strchr(new, '='))
 		return ;
-	if (duplicate(new))
+	if (is_key_exist(new))
 	{
 		update_value(new);
 		return ;
@@ -104,8 +100,6 @@ static void	set_env(char *new)
 	g_state.env_len += 1;
 }
 
-// err msg
-// bash: export: `1': not a valid identifier
 int	ft_export(t_cmd *cmd)
 {
 	t_node	*curr;
@@ -120,7 +114,7 @@ int	ft_export(t_cmd *cmd)
 		{
 			if (!is_valid_key(curr->str))
 			{
-				ft_putstr_fd("minishell: export: not a valid identifier\n", 2);
+				print_error3("export", curr->str, "not a valid identifier");
 				return (1);
 			}
 			else

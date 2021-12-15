@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:35:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:20:53 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 02:13:10 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	ft_env(t_cmd *cmd)
 	i = 0;
 	if (cmd->size > 1)
 	{
-		ft_putstr_fd("env: ", 2);
-		ft_putstr_fd(cmd->node->next->str, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		print_error2("env", cmd->node->next->str, "No such file or directory");
 		return (127);
 	}
 	while (i < g_state.env_len)

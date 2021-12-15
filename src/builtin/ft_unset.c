@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:24:43 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 01:20:16 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,22 @@ static int	check_key(char *key)
 	return (TRUE);
 }
 
-// 이차원 배열에 배열 하나만 추가하는 방법이 있나???
-// 환경변수 파싱할때 크게 메모리 할당하기?
+static int	is_same_key(char *key, char *env)
+{
+	int	key_len;
 
-// find_key 변수 만들기?
-// 아니면 len 변수 없애기??
-// line 수 줄이기
+	key_len = ft_strlen(key);
+	if (!ft_strncmp(key, env, key_len))
+		return (TRUE);
+	return (FALSE);
+}
+
 static void	unset_env(char *key)
 {
 	char	**temp;
 	int		flag;
 	int		i;
 	int		idx;
-	int		len;
 
 	temp = (char **)ft_calloc(g_state.env_len + 1, sizeof(char *));
 	if (temp == NULL)
@@ -50,30 +53,24 @@ static void	unset_env(char *key)
 	i = -1;
 	idx = 0;
 	flag = 0;
-	len = ft_strlen(key);
 	while (++i < g_state.env_len)
 	{
-		if (!ft_strncmp(key, g_state.env[i], len))
-		{
+		if (is_same_key(key, g_state.env[i]))
 			flag++;
-			free(g_state.env[i]);
-		}
 		else
 		{
 			temp[idx] = ft_strdup(g_state.env[i]);
-			free(g_state.env[i]);
 			if (temp[idx] == NULL)
 				return ;
 			idx++;
 		}
+		free(g_state.env[i]);
 	}
 	free(g_state.env);
 	g_state.env = temp;
 	g_state.env_len -= flag;
 }
 
-// err msg
-// bash: export: `1': not a valid identifier
 int	ft_unset(t_cmd *cmd)
 {
 	t_node	*curr;
@@ -88,7 +85,7 @@ int	ft_unset(t_cmd *cmd)
 		{
 			if (!check_key(curr->str))
 			{
-				printf("minishell: unset: not a valid identifier\n");
+				print_error3("unset", curr->str, "not a valid identifier");
 				return (1);
 			}
 			else
