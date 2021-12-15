@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/15 14:28:01 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/15 16:54:09 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,16 @@ t_cmd *ft_cmdmap(t_cmd *cmd, void *(*f)(void *),
 
 
 void set_signal(void);
-int check_space(char *s);
-void execution(t_cmd *cmd);
+void prompt(void);
 
+void print_export(void);
+
+int free_split(char **s);
+char *find_path(char *cmd);
+int check_space(char *s);
 char **set_cmds(t_cmd *cmd);
 
+/* builtin */
 void ft_exit(t_cmd *cmd);
 int ft_pwd(void);
 int ft_echo(t_cmd *cmd);
@@ -114,19 +119,15 @@ int ft_export(t_cmd *cmd);
 int ft_unset(t_cmd *cmd);
 int ft_cd(t_cmd *cmd);
 
-void print_export(void);
 
-char *find_value(char *key);
-void prompt(void);
-
-int free_split(char **s);
-char *find_path(char *cmd);
-
+/* env */
 char *get_key(char *str);
 char *get_value(char *str);
 void env_update(char *key, char *value);
-
 void get_env(t_cmd *cmd);
+char *find_value(char *key);
+
+void execution(t_cmd *cmd);
 
 /* parsing */
 t_node	*parse_line(char *line);

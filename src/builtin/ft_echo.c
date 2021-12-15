@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:06:42 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 16:23:11 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 17:08:47 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	check_opt_n(char *opt)
 
 // 환경변수 체크 파싱부분으로 옮기기
 // echo에서는 그대로 출력
+// 나중에 없애기!!!!
 static int	print_env(char *env)
 {
 	char	*s;
@@ -76,7 +77,7 @@ int	ft_echo(t_cmd *cmd)
 	}
 	while (curr)
 	{
-		if (print_env(curr->str) == FAIL)
+		//if (print_env(curr->str) == FAIL)
 			ft_putstr_fd(curr->str, 1);
 		curr = curr->next;
 		if (curr)

@@ -3,17 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:02:52 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:22:38 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 18:24:09 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-// cd_home
-// cd_oldpwd
-// get_env -> 빌트인 함수 호출 전에 변경?
 
 /*
 cd: cd home
@@ -102,12 +98,16 @@ int	ft_cd(t_cmd *cmd)
 	if (cmd->size == 1)
 		return (cd_home());
 	path = cmd->node->next->str;
-	if (!ft_strcmp(path, "~"))
-		return (cd_home());
+	if (ft_strlen(path) == 0)	
+	{
+		ft_putstr_fd("cd: HOME not set\n", 2);
+		return (1);
+	}
 	if (!ft_strcmp(path, "-") || !ft_strcmp(path, "--"))
 		return (cd_oldpwd());
 	if (*path == '-' && ft_strlen(path) > 1)
 	{
+		ft_putstr_fd("bash: cd: --: invalid option", 2);
 		ft_putstr_fd("cd: usage: cd [dir]\n", 2);
 		return (1);
 	}
@@ -115,9 +115,11 @@ int	ft_cd(t_cmd *cmd)
 	ret = chdir(path);
 	if (ret == -1)
 	{
+		// stat으로 존재x인지 디렉토리 아닌지 확인
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		//strerror(errno)
 		return (1);
 	}
 	env_update("PWD", path);

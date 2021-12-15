@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:31:05 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:56:31 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ void	prompt(void)
 		{
 			tcmd = parsing(line);
 			get_env(tcmd);
- 			//print_cmd(tcmd);
 			add_history(line);
 			execution(tcmd);
-			//system("leaks minishell");
 			free_cmd(tcmd);
 		}
 		free(line);

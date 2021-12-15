@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:03:55 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:15:59 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 18:04:30 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*find_path(char *cmd)
 	struct stat	s;
 
 	temp = find_value("PATH");
+	if (temp == NULL)
+		return (NULL);
 	paths = ft_split(temp, ':');
 	i = -1;
 	while (paths[++i])

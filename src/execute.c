@@ -6,11 +6,48 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 16:50:29 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 18:09:03 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	exec_file(char *file)
+{
+	char	*cmd[2];
+	struct stat	s;
+
+	cmd[0] = file;
+	cmd[1] = 0;
+	if (stat(file, &s) == 0)
+	{
+		if (S_ISDIR(s.st_mode))
+		{
+			// bash: /sbin/: is a directory
+			ft_putstr_fd(": is a directory\n", 2);
+			free(file);
+			exit(126);
+		}
+		else if (S_ISREG(s.st_mode))
+		{
+			if (!(s.st_mode & S_IXUSR))
+			{
+				ft_putstr_fd("Permission denied\n", 2);
+				free(file);
+				exit(126);
+			}
+			if (execve(file, cmd, g_state.env) == -1)
+			{
+				free(file);
+				exit(127);
+			}
+		}
+	}
+	ft_putstr_fd("No such file or directory\n", 2);
+	free(file);
+	exit(127);
+}
+//https://www.it-note.kr/173
 
 // 리다이렉트 처리, 에러메시지 수정
 void	non_builtin(t_cmd *cmd)
@@ -21,12 +58,19 @@ void	non_builtin(t_cmd *cmd)
 	int		status;
 	int		ret;
 
-	pid = fork();
+	pid = fork();		
 	if (pid < -1)
 		return ;
 	if (pid == 0)
 	{
 		path = find_path(cmd->node->str);
+		if (path == NULL)
+		{
+			ft_putstr_fd("No such file or directory\n", 2);
+			exit(127);
+		}
+		if (ft_strchr(path, '/'))
+			exec_file(path); // free.....
 		cmdlines = set_cmds(cmd);
 		ret = execve(path, cmdlines, g_state.env);
 		free(path);
