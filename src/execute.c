@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:01:18 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:18:44 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,18 @@ void	non_builtin(t_cmd *cmd)
 		{
 			ft_putstr_fd(cmd->node->str, 2);
 			ft_putstr_fd(": command not found\n", 2);
-			free_split(cmdlines);
+			free(path);
+			free(cmdlines);
 			exit(127);
 		}
+		free(path);
+		free(cmdlines);
 	}
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
 			g_state.exit_status = WEXITSTATUS(status);
 	}
-	free_split(cmdlines);
 }
 
 void	builtin(t_cmd *cmd)

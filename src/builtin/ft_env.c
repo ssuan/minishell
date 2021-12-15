@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:35:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:14:48 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:20:53 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	env_update(char *key, char *value)
 		if (!ft_strncmp(key, g_state.env[i], len))
 		{
 			free(g_state.env[i]);
-			g_state.env[i] = ft_strdup(new);
+			g_state.env[i] = new;
 			return ;
 		}
 		i++;

@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-static int	get_env(char **str)
+static int	get_env_value(char **str)
 {
 	char	*s;
 	char	*tmp;
@@ -21,46 +21,43 @@ static int	get_env(char **str)
 	// if (**str == '~') 추가
 
 	i = 0;
-	if (*str[i] != '$')
+	if ((*str)[i] != '$')
 		return (FAIL);
 	s = NULL;
 	i++;
-	if (*str[i] == '\0')
+	if ((*str)[i] == '\0')
 		return (FAIL);
-	if (ft_strchr("0123456789?", *str[i]))
+	if (ft_strchr("0123456789?", (*str)[i]))
 	{
-		if (*str[i] == '?')
+		if ((*str)[i] == '?')
 			s = ft_itoa(g_state.exit_status);
-		if (*str[i] == '0')
+		if ((*str)[i] == '0')
 			s = ft_strdup("minishell");
 		if (s == NULL)
 			s = ft_strdup("");
 		i++;
-		tmp = ft_strjoin(s, *str);
-		//free(*str); // free 제대로 안됨-> 인덱스로 수정
+		tmp = ft_strjoin(s, *str + i);
+		free(*str);
 		free(s);
 		*str = tmp;
 		return (SUCCESS);
 	}
-	s = find_value(*str);
-	printf("#%s\n", s);
+	s = find_value(*str + i);
 	if (s == NULL)
 		s = ft_strdup("");
-	//free(*str);
+	free(*str);
 	*str = s;
 	return (SUCCESS);
 }
 
-void dollor_to_env(t_cmd *cmd)
+void get_env(t_cmd *cmd)
 {
 	t_node *curr;
 
 	curr = cmd->node;
 	while (curr)
 	{
-		printf("%s\n", curr->str);
-		get_env(&(curr->str));
-		printf("%s\n", curr->str);
+		get_env_value(&(curr->str)); // check_env?
 		curr = curr->next;
 	}
 }

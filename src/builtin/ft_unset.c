@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:08:18 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:24:43 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ static void	unset_env(char *key)
 	while (++i < g_state.env_len)
 	{
 		if (!ft_strncmp(key, g_state.env[i], len))
+		{
 			flag++;
+			free(g_state.env[i]);
+		}
 		else
 		{
 			temp[idx] = ft_strdup(g_state.env[i]);
+			free(g_state.env[i]);
 			if (temp[idx] == NULL)
 				return ;
 			idx++;

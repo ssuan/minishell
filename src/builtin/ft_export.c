@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:56:14 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 17:59:06 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/15 16:23:13 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	update_value(char *new)
 	i = 0;
 	key = get_key(new);
 	len = ft_strlen(key);
+	free(key);
 	while (i < g_state.env_len)
 	{
 		if (!ft_strncmp(new, g_state.env[i], len))
@@ -93,6 +94,7 @@ static void	set_env(char *new)
 	while (++i < g_state.env_len)
 	{
 		temp[i] = ft_strdup(g_state.env[i]);
+		free(g_state.env[i]);
 		if (temp[i] == NULL)
 			return ;
 	}

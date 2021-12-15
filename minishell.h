@@ -126,7 +126,7 @@ char *get_key(char *str);
 char *get_value(char *str);
 void env_update(char *key, char *value);
 
-void dollor_to_env(t_cmd *cmd);
+void get_env(t_cmd *cmd);
 
 /* parsing */
 t_node	*parse_line(char *line);
