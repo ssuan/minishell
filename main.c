@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:00:33 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/14 19:42:25 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/15 14:10:35 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,35 @@ int main(int argc, char **argv, char **envp)
 	t_cmd	*cur_tcmd;
 	t_node	*cur_node;
 	
-	initialize_data(argc, argv, envp);
-	line_node = parse_line("echo \'abd cc<><\'>> ||| > \' asd bb\'d !! ");
-	tcmd = node_to_cmd(line_node);
-	cmd_connect_break(tcmd);
-	free_cmd(tcmd);
+	// initialize_data(argc, argv, envp);
+	// line_node = parse_line("echo \'abd cc<><\'>> ||| > \' asd bb\'d !! ");
+	// tcmd = node_to_cmd(line_node);
+	// cmd_connect_break(tcmd);
+	// free_cmd(tcmd);
+	
+	// line_node = parse_line("echo abd ccd");
+	// tcmd = node_to_cmd(line_node);
+	// cmd_connect_break(tcmd);
+	// free_cmd(tcmd);
 	
 	line_node = parse_line("echo abd ccd");
 	tcmd = node_to_cmd(line_node);
 	cmd_connect_break(tcmd);
 	free_cmd(tcmd);
 	
-	line_node = parse_line("echo abd ccd");
+	line_node = parse_line("|||||");
+	print_node(line_node);
 	tcmd = node_to_cmd(line_node);
 	cmd_connect_break(tcmd);
 	free_cmd(tcmd);
-	
-	line_node = parse_line("||||||");
+	// cmd_connect_break(tcmd);
+	line_node = parse_line("|||||");
+	print_node(line_node);
+	tcmd = node_to_cmd(line_node);
+	cmd_connect_break(tcmd);
+	free_cmd(tcmd);
+	line_node = parse_line("|||||");
+	print_node(line_node);
 	tcmd = node_to_cmd(line_node);
 	cmd_connect_break(tcmd);
 	free_cmd(tcmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/14 16:04:00 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/15 14:23:14 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,17 @@ t_node	*parse_line(char *line)
 	if (save_str_node(tmp_node, &save_str) == 0)
 		return (0);
 	return (tmp_node);
+}
+
+t_cmd	*parsing(char *line)
+{
+	t_node	*line_node;
+	t_cmd	*tcmd;
+
+	line_node = parse_line(line);
+	if (!line_node)
+		return (0);
+	tcmd = node_to_cmd(line_node);
+	cmd_connect_break(tcmd);
+	return (tcmd);
 }
