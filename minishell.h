@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/15 14:20:55 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/15 14:28:01 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int save_str_join(char **line, char **save_str);
 int	free_node(t_node *node);
 int	free_cmd(t_cmd *tcmd);
 t_cmd	*parsing(char *line);
-
+int cmd_connect_break(t_cmd *tcmd);
 void	set_signal(void);
 int	check_space(char *s);
 int	execution(char *cmd);

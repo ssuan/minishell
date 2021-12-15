@@ -6,11 +6,36 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/15 14:23:14 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/15 14:27:55 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../minishell.h"
+
+int cmd_connect_break(t_cmd *tcmd)
+{
+	int		loop;
+	t_node	*cur_node;
+	t_cmd	*cur_tcmd;
+
+	cur_tcmd = tcmd;
+	while (cur_tcmd != NULL)
+	{
+		loop = 1;
+		cur_node = cur_tcmd->node;
+		cur_node->prev = NULL;
+		//printf("SIZE [%d] \nNODE = [%s] ", cur_tcmd->size, cur_node->str); 
+		while(cur_node != NULL && loop++ < cur_tcmd->size )
+		{
+			cur_node = cur_node->next;
+		//	printf("[%s]", cur_node->str);
+		}
+		//printf("\n");
+		cur_node->next = NULL;
+		cur_tcmd = cur_tcmd->next;
+	}
+	return (0);
+}
 
 int	check_syntax_space(char *line)
 {
