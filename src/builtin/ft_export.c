@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:56:14 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 01:28:10 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:57:20 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,11 @@ static void	set_env(char *new)
 	while (++i < g_state.env_len)
 	{
 		temp[i] = ft_strdup(g_state.env[i]);
-		free(g_state.env[i]);
 		if (temp[i] == NULL)
 			return ;
 	}
 	temp[i] = ft_strdup(new);
-	free(g_state.env);
+	free_arr2(g_state.env);
 	g_state.env = temp;
 	g_state.env_len += 1;
 }

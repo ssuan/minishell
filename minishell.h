@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/16 15:42:35 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:54:09 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	prompt(void);
 
 void	print_export(void);
 
-int		free_split(char **s);
+int		free_arr2(char **s);
 char	*find_path(char *cmd);
 int		check_space(char *s);
 char	**set_cmds(t_cmd *cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 01:20:16 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 18:05:32 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,23 @@ static int	check_key(char *key)
 	return (TRUE);
 }
 
-static int	is_same_key(char *key, char *env)
+static int	check_key_exist(char *key, char *env, int *cnt)
 {
 	int	key_len;
 
 	key_len = ft_strlen(key);
 	if (!ft_strncmp(key, env, key_len))
+	{
+		*cnt += 1;
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
 static void	unset_env(char *key)
 {
 	char	**temp;
-	int		flag;
+	int		cnt;
 	int		i;
 	int		idx;
 
@@ -52,23 +55,20 @@ static void	unset_env(char *key)
 		return ;
 	i = -1;
 	idx = 0;
-	flag = 0;
+	cnt = 0;
 	while (++i < g_state.env_len)
 	{
-		if (is_same_key(key, g_state.env[i]))
-			flag++;
-		else
+		if (!check_key_exist(key, g_state.env[i], &cnt))
 		{
 			temp[idx] = ft_strdup(g_state.env[i]);
 			if (temp[idx] == NULL)
 				return ;
 			idx++;
 		}
-		free(g_state.env[i]);
 	}
-	free(g_state.env);
+	free_arr2(g_state.env);
 	g_state.env = temp;
-	g_state.env_len -= flag;
+	g_state.env_len -= cnt;
 }
 
 int	ft_unset(t_cmd *cmd)

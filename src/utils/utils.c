@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 01:48:23 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:54:00 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // 2차원 배열 free
-int	free_split(char **s)
+int	free_arr2(char **s)
 {
 	int	i;
 
