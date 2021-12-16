@@ -3,26 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:43:31 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 02:17:14 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 18:29:31 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	error(char *msg)
+void	error(char *msg, int status)
 {
-	printf("%sError: %s %s\n", COLOR_RED, msg, COLOR_NORMAL);
-	exit (EXIT_FAILURE);
-	return (0);
-}
-
-int	error_keep(char *msg)
-{
-	printf("%sError: %s %s\n", COLOR_RED, msg, COLOR_NORMAL);
-	return (0);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	if (status == TRUE)
+		exit(1);
 }
 
 void	print_error(char *command, char *msg)

@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 15:44:56 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 18:30:37 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,25 @@ int	logic_specifi(char **line, char **save_str, t_node *line_node)
 	if ((**line == ' '
 			&& parse_space(line, save_str, line_node) == 0))
 	{
-		error_keep("SPACE_ERROR\n");
+		error("SPACE_ERROR", FALSE);
 		return (FAIL);
 	}
 	else if (**line == '|'
 		&& parse_pipe(line, save_str, line_node) == 0)
 	{	
-		error_keep("PIPE_ERROR\n");
+		error("PIPE_ERROR", FALSE);
 		return (FAIL);
 	}
 	else if ((**line == '<' || **line == '>')
 		&& parse_redir(line, save_str, line_node) == 0)
 	{	
-		error_keep("REDIR_ERROR\n");
+		error("REDIR_ERROR", FALSE);
 		return (FAIL);
 	}
 	else if ((**line == '\'' || **line == '\"')
 		&& parse_quote(line, save_str, line_node) == 0)
 	{
-		error_keep("QOUTE_ERROR\n");
+		error("QUOTE_ERROR", FALSE);
 		return (FAIL);
 	}
 	return (SUCCESS);

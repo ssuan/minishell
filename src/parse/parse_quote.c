@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 17:07:55 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 18:28:49 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*process_quote(char *line)
 	pos = ft_strchr(line + 1, (int)*line);
 	if (pos == NULL)
 	{
-		error_keep(STR_SINGLE_QUOTE_ERR);
+		print_error("quote", "This Syntex has only one quote charictor");
 		return (FAIL);
 	}
 	else
