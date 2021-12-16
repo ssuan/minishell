@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:02:52 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:24:10 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:29:59 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	cd_home(void)
 	if (chdir(path) == -1)
 	{
 		print_error2("cd", path, "No such file or directory");
+		free(old);
 		return (1);
 	}
 	env_update("PWD", path);
@@ -50,6 +51,7 @@ int	cd_oldpwd(void)
 	if (chdir(path) == -1)
 	{
 		print_error2("cd", path, "No such file or directory");
+		free(old);
 		return (1);
 	}
 	env_update("PWD", path);
@@ -68,6 +70,7 @@ int	cd_path(char *path)
 	if (ret == -1)
 	{
 		print_error2("cd", path, strerror(errno));
+		free(old);
 		return (1);
 	}
 	env_update("PWD", path);
