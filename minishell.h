@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/16 02:16:44 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 15:42:35 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,19 @@
 
 # define SPECIFIER "|<>"
 
+# define STRING 0
+# define SQUOTE 1
+# define DQUOTE 2
+# define PIPE 3
+# define REDIR_IN 4
+# define REDIR_IN_A 5
+# define REDIR_OUT 6
+# define REDIR_OUT_A 7
+
 typedef struct s_node
 {
 	char			*str;
+	int				flag;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -64,6 +74,7 @@ typedef struct s_state
 	char	**env;
 	int		env_len;
 	int		exit_status;
+	int		flag;
 }	t_state;
 
 t_state	g_state;
@@ -77,7 +88,7 @@ void	print_node(t_node *line_node);
 void	print_cmd(t_cmd *tcmd);
 
 /* NODE */
-t_node	*ft_nodenew(void *content);
+t_node	*ft_nodenew(void *content, int flag);
 void	ft_nodeadd_front(t_node **node, t_node *new);
 int		ft_nodesize(t_node *node);
 t_node	*ft_nodelast(t_node *node);
@@ -136,7 +147,7 @@ void	non_builtin(t_cmd *cmd);
 /* parsing */
 t_node	*parse_line(char *line);
 int		parse_space(char **line, char **save_str, t_node *line_node);
-int		parse_qoute(char **line, char **save_str, t_node *line_node);
+int		parse_quote(char **line, char **save_str, t_node *line_node);
 int		parse_pipe(char **line, char **save_str, t_node *line_node);
 int		parse_redir(char **line, char **save_str, t_node *line_node);
 int		save_str_node(t_node *node, char **save_str);

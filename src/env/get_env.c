@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:28:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/15 18:40:01 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 15:50:26 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	get_env(t_cmd *cmd)
 	curr = cmd->node;
 	while (curr)
 	{
-		check_env(&(curr->str));
+		if (curr->flag == STRING || curr->flag == DQUOTE)
+			check_env(&(curr->str));
 		curr = curr->next;
 	}
 }

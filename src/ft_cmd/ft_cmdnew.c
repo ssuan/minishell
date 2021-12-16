@@ -20,6 +20,5 @@ t_cmd	*ft_cmdnew(void *content)
 	if (!new)
 		return (0);
 	new->node = content;
-	new->next = 0;
 	return (new);
 }

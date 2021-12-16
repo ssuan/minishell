@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_nodemap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 20:27:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/12 21:28:11 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:47:00 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_node	*ft_nodemap(t_node *node, void *(*f)(void *), void (*del)(void *))
 	map = 0;
 	while (node)
 	{
-		new = ft_nodenew((*f)(node->str));
+		new = ft_nodenew((*f)(node->str), node->flag);
 		if (!new)
 		{
 			ft_nodeclear(&map, del);

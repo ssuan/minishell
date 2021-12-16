@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_qoute.c                                      :+:      :+:    :+:   */
+/*   parse_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/14 16:04:03 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:43:40 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*process_qoute(char *line)
+char	*process_quote(char *line)
 {
 	char	*pos;
 	int		str_len;
@@ -34,12 +34,16 @@ char	*process_qoute(char *line)
 	return (sub_str);
 }
 
-int	parse_qoute(char **line, char **save_str, t_node *line_node)
+int	parse_quote(char **line, char **save_str, t_node *line_node)
 {
 	char	*sub_str;
 	char	*free_str;
 
-	sub_str = process_qoute(*line);
+	if (**line == '\'')
+		g_state.flag = SQUOTE;
+	if (**line == '\"')
+		g_state.flag = DQUOTE;
+	sub_str = process_quote(*line);
 	if (!sub_str)
 		return (FAIL);
 	if (*save_str == NULL)

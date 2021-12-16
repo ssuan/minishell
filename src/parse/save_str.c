@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:41:08 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/14 19:34:18 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:49:30 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	save_str_node(t_node *node, char **save_str)
 		temp_str = ft_strdup(*save_str);
 		if (temp_str == NULL)
 			return (FAIL);
-		ft_nodeadd_back(&node, ft_nodenew((char *)temp_str));
+		ft_nodeadd_back(&node, ft_nodenew((char *)temp_str, g_state.flag));
+		g_state.flag = 0;
 		free(*save_str);
 		*save_str = 0;
 		return (SUCCESS);

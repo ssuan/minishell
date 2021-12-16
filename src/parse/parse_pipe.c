@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:02:49 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/14 16:04:05 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:44:36 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	process_pipe(t_node *node, char *line, char *save_str)
 	node_str = ft_strdup("|");
 	if (node_str == 0)
 		return (FAIL);
-	ft_nodeadd_back(&node, ft_nodenew((char *)node_str));
+	g_state.flag = PIPE;
+	ft_nodeadd_back(&node, ft_nodenew((char *)node_str, g_state.flag));
+	g_state.flag = 0;
 	return (1);
 }
 

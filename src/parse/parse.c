@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/15 14:27:55 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:44:56 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	logic_specifi(char **line, char **save_str, t_node *line_node)
 		return (FAIL);
 	}
 	else if ((**line == '\'' || **line == '\"')
-		&& parse_qoute(line, save_str, line_node) == 0)
+		&& parse_quote(line, save_str, line_node) == 0)
 	{
 		error_keep("QOUTE_ERROR\n");
 		return (FAIL);
