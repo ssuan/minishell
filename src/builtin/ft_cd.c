@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:02:52 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 01:43:40 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:24:10 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,7 @@ int	ft_cd(t_cmd *cmd)
 		return (cd_home());
 	path = cmd->node->next->str;
 	if (ft_strlen(path) == 0)
-	{
-		print_error("cd", "HOME not set");
-		return (1);
-	}
+		return (cd_home());
 	if (!ft_strcmp(path, "-") || !ft_strcmp(path, "--"))
 		return (cd_oldpwd());
 	if (*path == '-' && ft_strlen(path) > 1)
