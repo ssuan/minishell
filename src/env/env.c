@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 20:58:39 by suan              #+#    #+#             */
-/*   Updated: 2021/12/14 18:27:34 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:32:30 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,29 @@ char	*get_value(char *str)
 	value = ft_calloc(sizeof(char), len - i + 1);
 	ft_strlcpy(value, str + i + 1, len - i + 1);
 	return (value);
+}
+
+void	env_update(char *key, char *value)
+{
+	int		i;
+	int		len;
+	char	*new;
+	char	*temp;
+
+	i = 0;
+	len = ft_strlen(key);
+	temp = ft_strjoin(key, "=");
+	new = ft_strjoin(temp, value);
+	free(temp);
+	while (i < g_state.env_len)
+	{
+		if (!ft_strncmp(key, g_state.env[i], len))
+		{
+			free(g_state.env[i]);
+			g_state.env[i] = new;
+			return ;
+		}
+		i++;
+	}
+	return ;
 }

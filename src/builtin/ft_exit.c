@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:54:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:20:28 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:42:19 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static int	check_digit(char *s)
 
 void	ft_exit(t_cmd *cmd)
 {
+	ft_putstr_fd("exit\n", 2);
 	if (cmd->size == 1)
 		g_state.exit_status = 0;
 	else if (cmd->size == 2 && check_digit(cmd->node->next->str))
-		g_state.exit_status = ft_atoi(cmd->node->str) % 256;
+		g_state.exit_status = ft_atoi(cmd->node->next->str);
 	else if (cmd->size > 1 && !check_digit(cmd->node->next->str))
 	{
 		print_error2("exit", cmd->node->next->str, "numeric argument required");
-		g_state.exit_status = -1;
-		return ;
+		g_state.exit_status = 255;
 	}
 	else if (cmd->size > 2)
 	{
@@ -43,7 +43,8 @@ void	ft_exit(t_cmd *cmd)
 		g_state.exit_status = 1;
 		return ;
 	}
-	if (cmd->next && !ft_strcmp(cmd->next->node->str, "|"))
+	if ((cmd->next && cmd->next->node->flag == PIPE)
+		|| (cmd->prev && cmd->prev->node->flag == PIPE))
 		return ;
 	exit(g_state.exit_status % 256);
 }
