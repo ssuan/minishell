@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 01:48:36 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/16 17:03:57 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	prompt(void)
 		if (!check_space(line))
 		{
 			tcmd = parsing(line);
+			if (!tcmd)
+			{
+				free_cmd(tcmd);
+				free(line);
+				continue ;
+			}
 			get_env(tcmd);
 			add_history(line);
 			execute(tcmd);
