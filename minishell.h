@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/16 18:29:21 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/20 19:42:05 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <errno.h>
+# include <sys/types.h> 
+# include <fcntl.h>
 # include "./libft/libft.h"
 
 # define FAIL 0
@@ -74,6 +76,14 @@ typedef struct s_state
 	int		env_len;
 	int		exit_status;
 	int		flag;
+	
+	// FIX
+	int		cmd_cnt;
+	int		backup_cnt;
+	int		pipe_set[2][2];
+	int		fork;
+	int		redir_in;
+	int		redir_out;
 }	t_state;
 
 t_state	g_state;
@@ -137,10 +147,19 @@ char	*get_value(char *str);
 void	env_update(char *key, char *value);
 
 /* execute */
+void	pre_execute(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 int		is_builtin(t_cmd *cmd);
 void	builtin(t_cmd *cmd);
 void	non_builtin(t_cmd *cmd);
+
+/* redirect */
+void	connect_redirect(t_cmd *cmd);
+int		redirect_in(char *file);
+int		redirect_out(char *file);
+int		redirect_out_append(char *file);
+void	here_doc(t_cmd *cmd);
+void	connect_pipe(int fd[2], int io);
 
 /* parsing */
 t_node	*parse_line(char *line);
