@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 16:15:23 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 18:09:53 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,28 @@ void	get_line(char **line)
 void print_node(t_node *line_node)
 {
 	t_node *cur_node;
+	int loop = 0;
 
 	/* NODE CHECK */
 	cur_node = line_node;
+	printf("print node ");
 	while (cur_node->next != 0)
 	{
+		printf("%d", loop++);
 		cur_node = cur_node->next;
 		if (cur_node != 0)
-			printf("node[%s]\n", cur_node->str);
+			printf("[%s] ", cur_node->str);
 	}
-	printf("-----PREV CHECK-------");
-	// NODE PREV
-	while (cur_node != 0)
-	{
-		if (cur_node != 0)
-			printf("node[%s]\n", cur_node->str);
-		cur_node = cur_node->prev;
-	}
-	printf("________________");
+	printf("\n----------------\n");
+	// printf("-----PREV CHECK-------\n");
+	// // NODE PREV
+	// while (cur_node != 0)
+	// {
+	// 	if (cur_node != 0)
+	// 		printf("node[%s]\n", cur_node->str);
+	// 	cur_node = cur_node->prev;
+	// }
+	// printf("________________\n");
 }
 
 void print_cmd(t_cmd *tcmd)
@@ -58,9 +62,10 @@ void print_cmd(t_cmd *tcmd)
 	{
 		cur_node = cur_tcmd->node;
 		loop = 0;
+		//printf("ad:%p ", cur_node);
 		while (cur_node != NULL)
 		{
-			printf("[%s]", cur_node->str);
+			printf("%d [%s]", cur_node->flag, cur_node->str);
 			cur_node = cur_node->next;
 		}
 		printf("\n");

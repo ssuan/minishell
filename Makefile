@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: suan <suan@student.42.fr>                  +#+  +:+       +#+         #
+#    By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 14:05:19 by suan              #+#    #+#              #
-#    Updated: 2021/12/21 15:18:54 by suan             ###   ########.fr        #
+#    Updated: 2021/12/21 18:12:59 by sunbchoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = minishell
 
@@ -47,9 +48,12 @@ INC = -I./
 
 all: $(NAME)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC) $(READLINE_INC) 
+
 $(NAME): $(OBJS)
 	make all -C $(LIBFT)/
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INC) $(LIBFT)/$(LIBFT_LIB) $(READLINE_INC) $(READLINE_LIB)
+	$(CC) $(CFLAGS) $(OBJS) $(INC) $(READLINE_INC) $(READLINE_LIB) $(LIBFT)/$(LIBFT_LIB) -o $(NAME) 
 
 clean:
 	$(RM) $(OBJS)

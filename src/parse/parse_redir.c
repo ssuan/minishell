@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:30:32 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 15:42:48 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 18:11:48 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	parse_redir(char **line, char **save_str, t_node *line_node)
 {
 	int	check;
 
+	if (g_state.flag < 4)
+		if (save_str_node(line_node, save_str) == 0)
+			return (0);
 	if (**line == '<')
 		g_state.flag = REDIR_IN;
 	if (**line == '>')
