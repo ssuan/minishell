@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:49:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 14:23:24 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 18:28:28 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_cmd	*node_to_cmd(t_node *node)
 {
 	t_cmd	*tcmd;
 	t_cmd	*cur_tcmd;
+	t_cmd	*nxt_tcmd;
 	t_node	*cur_node;
 
 	tcmd = (t_cmd *)ft_calloc(sizeof(t_cmd), 1);
@@ -50,6 +51,16 @@ t_cmd	*node_to_cmd(t_node *node)
 		{	
 			cur_tcmd->node = cur_node;
 			cur_tcmd->size = 1;
+			if (ft_strchr(SPECIFIER, (int)cur_node->str[0]) != NULL)
+			{
+				if ((cur_node->next != NULL)
+					&& (ft_strchr(SPECIFIER, cur_node->next->str[0]) == 0))
+				{
+					nxt_tcmd = ft_cmdnew(NULL);
+					ft_cmdadd_back(&tcmd, nxt_tcmd);
+					cur_tcmd = nxt_tcmd;
+				}
+			}
 		}
 		else if (ft_strchr(SPECIFIER, (int)cur_node->str[0]) != NULL)
 			cur_tcmd = process_cmd_logic(&cur_node, &cur_tcmd);
