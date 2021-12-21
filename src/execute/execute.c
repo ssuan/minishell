@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 18:48:16 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 18:56:03 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	pre_execute(t_cmd *cmd)
 		cur_node = cur_tcmd->node;
 		if (cur_node->flag == PIPE)
 		{
-			if (!cur_tcmd->prev || (cur_tcmd->prev && cur_tcmd->prev->node->flag >= 4)
-			|| !cur_tcmd->next || (cur_tcmd->next && cur_tcmd->next->node->flag >= 4))
+			if (!cur_tcmd->prev || (cur_tcmd->prev && cur_tcmd->prev->node->flag >= 3)
+			|| !cur_tcmd->next || (cur_tcmd->next && cur_tcmd->next->node->flag >= 3))
 				{
 					ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 					g_state.exit_status = 258;
@@ -52,7 +52,6 @@ int	connect_redirect(t_cmd *cmd)
 	while (cur_tcmd && redir_check == 0)
 	{
 		cur_node = cur_tcmd->node;
-		print_cmd(cur_tcmd);
 		if (cur_node->flag > 3)
 			redir_check = 1;
 		if (redir_check && cur_tcmd->next == NULL)
