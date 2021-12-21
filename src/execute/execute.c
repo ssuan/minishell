@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 14:23:02 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 16:13:54 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,22 @@ void	pre_execute(t_cmd *cmd)
 	}
 }
 
-void	connect_redirect(t_cmd *cmd)
+int	connect_redirect(t_cmd *cmd)
 {
 	t_node	*cur_node;
 	t_cmd	*cur_tcmd;
 	
 	cur_tcmd = cmd;
 	cur_node = cur_tcmd->node;
-	while (cur_tcmd && cur_node->flag != PIPE)
+	while (cur_tcmd && cur_node->flag >= 4 && cur_node->flag <= 7)
 	{
 		cur_node = cur_tcmd->node;
+		if (cur_tcmd->next == NULL)
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+			g_state.exit_status = 258;
+			return (FAIL);
+		}
 		if (cur_node->flag == REDIR_OUT)
 			redirect_out(cur_tcmd->next->node->str);
 		else if (cur_node->flag == REDIR_IN)
@@ -50,6 +56,7 @@ void	connect_redirect(t_cmd *cmd)
 		//  	here_doc(cur_node->next);
 		cur_tcmd = cur_tcmd->next;
 	}
+	return (SUCCESS);
 }
 
 void	execute_cmd(t_cmd *cmd)
@@ -75,7 +82,8 @@ void	execute(t_cmd *cmd)
 		fd_stdout = dup(STDOUT_FILENO);		
 		if (g_state.cmd_cnt > 1)
 			pipe(g_state.pipe_set[1]);
-		connect_redirect(cur_tcmd);
+		if (connect_redirect(cur_tcmd) == FAIL)
+			return ;
 		
 		if (g_state.exit_status == 1 && g_state.redir_in == -1)
 			return ;

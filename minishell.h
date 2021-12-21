@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/20 19:42:05 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:50:21 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	builtin(t_cmd *cmd);
 void	non_builtin(t_cmd *cmd);
 
 /* redirect */
-void	connect_redirect(t_cmd *cmd);
+int	connect_redirect(t_cmd *cmd);
 int		redirect_in(char *file);
 int		redirect_out(char *file);
 int		redirect_out_append(char *file);

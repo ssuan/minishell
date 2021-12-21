@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 14:25:45 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 15:44:07 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	cmd_connect_break(t_cmd *tcmd)
 	return (0);
 }
 
-int	check_syntax_space(char *line)
+int	check_syntax_space(char *line) // 안쓰는 함수?
 {
 	int	space;
 	int	loop;
@@ -59,28 +59,16 @@ int	logic_specifi(char **line, char **save_str, t_node *line_node)
 {
 	if ((**line == ' '
 			&& parse_space(line, save_str, line_node) == 0))
-	{
-		error("SPACE_ERROR", FALSE);
 		return (FAIL);
-	}
 	else if (**line == '|'
 		&& parse_pipe(line, save_str, line_node) == 0)
-	{	
-		error("PIPE_ERROR", FALSE);
 		return (FAIL);
-	}
 	else if ((**line == '<' || **line == '>')
 		&& parse_redir(line, save_str, line_node) == 0)
-	{	
-		error("REDIR_ERROR", FALSE);
 		return (FAIL);
-	}
 	else if ((**line == '\'' || **line == '\"')
 		&& parse_quote(line, save_str, line_node) == 0)
-	{
-		error("QUOTE_ERROR", FALSE);
 		return (FAIL);
-	}
 	return (SUCCESS);
 }
 
