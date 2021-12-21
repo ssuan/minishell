@@ -6,13 +6,13 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 16:13:54 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 18:48:16 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	pre_execute(t_cmd *cmd)
+int	pre_execute(t_cmd *cmd)
 {
 	t_node	*cur_node;
 	t_cmd	*cur_tcmd;
@@ -25,22 +25,37 @@ void	pre_execute(t_cmd *cmd)
 	{
 		cur_node = cur_tcmd->node;
 		if (cur_node->flag == PIPE)
+		{
+			if (!cur_tcmd->prev || (cur_tcmd->prev && cur_tcmd->prev->node->flag >= 4)
+			|| !cur_tcmd->next || (cur_tcmd->next && cur_tcmd->next->node->flag >= 4))
+				{
+					ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
+					g_state.exit_status = 258;
+					return (FAIL);
+				}
 			g_state.cmd_cnt++;
+		}
 		cur_tcmd = cur_tcmd->next;
 	}
+	return (SUCCESS);
 }
 
 int	connect_redirect(t_cmd *cmd)
 {
 	t_node	*cur_node;
 	t_cmd	*cur_tcmd;
+	int		redir_check;
 	
 	cur_tcmd = cmd;
 	cur_node = cur_tcmd->node;
-	while (cur_tcmd && cur_node->flag >= 4 && cur_node->flag <= 7)
+	redir_check = 0;
+	while (cur_tcmd && redir_check == 0)
 	{
 		cur_node = cur_tcmd->node;
-		if (cur_tcmd->next == NULL)
+		print_cmd(cur_tcmd);
+		if (cur_node->flag > 3)
+			redir_check = 1;
+		if (redir_check && cur_tcmd->next == NULL)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 			g_state.exit_status = 258;
@@ -74,7 +89,8 @@ void	execute(t_cmd *cmd)
 	int		fd_stdout;
 	t_cmd	*cur_tcmd;
 	
-	pre_execute(cmd);
+	if (pre_execute(cmd) == FAIL)
+		return ;
 	cur_tcmd = cmd;
 	while (cur_tcmd != 0)
 	{

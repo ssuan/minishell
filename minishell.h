@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/21 15:50:21 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 18:37:41 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ char	*get_value(char *str);
 void	env_update(char *key, char *value);
 
 /* execute */
-void	pre_execute(t_cmd *cmd);
+int	pre_execute(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 int		is_builtin(t_cmd *cmd);
 void	builtin(t_cmd *cmd);
