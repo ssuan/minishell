@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 18:28:49 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:24:37 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	parse_quote(char **line, char **save_str, t_node *line_node)
 	char	*sub_str;
 	char	*free_str;
 
+	(void)line_node;
 	if (**line == '\'')
 		g_state.flag = SQUOTE;
 	if (**line == '\"')

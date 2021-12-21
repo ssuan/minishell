@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:28:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 15:50:26 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:21:07 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	check_var(char **str)
 static void	check_env(char **str)
 {
 	char	*s;
-	char	*tmp;
 
 	if ((*str)[0] == '~')
 	{

@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 21:56:14 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:57:20 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:20:07 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ static void	set_env(char *new)
 int	ft_export(t_cmd *cmd)
 {
 	t_node	*curr;
-	char	**split;
 
 	if (cmd->size == 1)
 		print_export();

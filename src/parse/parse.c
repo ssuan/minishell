@@ -6,13 +6,13 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 18:30:37 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:25:45 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int cmd_connect_break(t_cmd *tcmd)
+int	cmd_connect_break(t_cmd *tcmd)
 {
 	int		loop;
 	t_node	*cur_node;
@@ -24,13 +24,8 @@ int cmd_connect_break(t_cmd *tcmd)
 		loop = 1;
 		cur_node = cur_tcmd->node;
 		cur_node->prev = NULL;
-		//printf("SIZE [%d] \nNODE = [%s] ", cur_tcmd->size, cur_node->str); 
-		while(cur_node != NULL && loop++ < cur_tcmd->size )
-		{
+		while (cur_node != NULL && loop++ < cur_tcmd->size)
 			cur_node = cur_node->next;
-		//	printf("[%s]", cur_node->str);
-		}
-		//printf("\n");
 		cur_node->next = NULL;
 		cur_tcmd = cur_tcmd->next;
 	}
@@ -92,9 +87,7 @@ int	logic_specifi(char **line, char **save_str, t_node *line_node)
 t_node	*parse_line(char *line)
 {
 	t_node	*tmp_node;
-	char	*tmp_str;
 	char	*save_str;
-	char	*free_str;
 
 	save_str = 0;
 	tmp_node = (t_node *)ft_calloc(1, sizeof(t_node));

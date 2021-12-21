@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/20 19:56:16 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:23:02 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	pre_execute(t_cmd *cmd)
 {
 	t_node	*cur_node;
 	t_cmd	*cur_tcmd;
-	int		status;
 	
 	cur_tcmd = cmd;
 	g_state.backup_cnt = 1;
@@ -55,10 +54,6 @@ void	connect_redirect(t_cmd *cmd)
 
 void	execute_cmd(t_cmd *cmd)
 {
-	int		status;
-	pid_t	pid;
-
-
 	if (is_builtin(cmd))
 		builtin(cmd);
 	else

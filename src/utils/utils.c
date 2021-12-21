@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:54:00 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:26:09 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_space(char *s)
 			space++;
 		i++;
 	}
-	if (space == ft_strlen(s))
+	if (space == (int)ft_strlen(s))
 		return (1);
 	return (0);
 }

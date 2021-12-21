@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 18:05:32 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:20:42 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	unset_env(char *key)
 int	ft_unset(t_cmd *cmd)
 {
 	t_node	*curr;
-	char	**split;
 
 	if (cmd->size == 1)
 		return (0);

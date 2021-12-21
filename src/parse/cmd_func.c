@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:49:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/15 14:22:43 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/21 14:23:24 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_cmd	*node_to_cmd(t_node *node)
 	t_cmd	*tcmd;
 	t_cmd	*cur_tcmd;
 	t_node	*cur_node;
-	t_node	*nxt_node;
 
 	tcmd = (t_cmd *)ft_calloc(sizeof(t_cmd), 1);
 	cur_tcmd = tcmd;

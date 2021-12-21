@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:02:49 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 15:44:36 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/21 14:24:19 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	process_pipe(t_node *node, char *line, char *save_str)
 {
 	char	*node_str;
 
+	(void)line;
 	if (save_str_node(node, &save_str) == 0)
 		return (0);
 	node_str = ft_strdup("|");
@@ -30,7 +31,6 @@ int	process_pipe(t_node *node, char *line, char *save_str)
 int	parse_pipe(char **line, char **save_str, t_node *line_node)
 {
 	int	check;
-
 	check = process_pipe(line_node, *line, *save_str);
 	if (check == FAIL)
 		return (FAIL);
