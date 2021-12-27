@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:02:49 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 18:24:56 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:31:40 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	process_pipe(t_node *node, char *line, char *save_str)
 int	parse_pipe(char **line, char **save_str, t_node *line_node)
 {
 	int	check;
+
 	check = process_pipe(line_node, *line, *save_str);
 	if (check == FAIL)
 		return (FAIL);

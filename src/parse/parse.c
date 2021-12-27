@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 18:18:00 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:33:12 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,6 @@ int	cmd_connect_break(t_cmd *tcmd)
 		cur_tcmd = cur_tcmd->next;
 	}
 	return (0);
-}
-
-int	check_syntax_space(char *line) // 안쓰는 함수?
-{
-	int	space;
-	int	loop;
-
-	space = 0;
-	loop = 0;
-	if (line == NULL || line[0] == 0)
-		return (FAIL);
-	while (line[loop])
-	{
-		if (line[loop] == '\r' || line[loop] == '\v' || line[loop] == '\t'
-			|| line[loop] == '\f')
-			return (FAIL);
-		else if (line[loop] == ' ')
-			space++;
-		loop++;
-	}
-	if (space == (int)ft_strlen(line))
-		return (FAIL);
-	return (SUCCESS);
 }
 
 int	logic_specifi(char **line, char **save_str, t_node *line_node)
@@ -105,8 +82,6 @@ t_cmd	*parsing(char *line)
 	line_node = parse_line(line);
 	if (!line_node)
 		return (0);
-	print_node(line_node);
-	
 	tcmd = node_to_cmd(line_node);
 	if (tcmd->node == 0)
 	{

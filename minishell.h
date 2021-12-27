@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/21 18:37:41 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/27 18:30:19 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_state
 	int		env_len;
 	int		exit_status;
 	int		flag;
-	
 	// FIX
 	int		cmd_cnt;
 	int		backup_cnt;
@@ -147,14 +146,14 @@ char	*get_value(char *str);
 void	env_update(char *key, char *value);
 
 /* execute */
-int	pre_execute(t_cmd *cmd);
+int		pre_execute(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 int		is_builtin(t_cmd *cmd);
 void	builtin(t_cmd *cmd);
 void	non_builtin(t_cmd *cmd);
 
 /* redirect */
-int	connect_redirect(t_cmd *cmd);
+int		connect_redirect(t_cmd *cmd);
 int		redirect_in(char *file);
 int		redirect_out(char *file);
 int		redirect_out_append(char *file);

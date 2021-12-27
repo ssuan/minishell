@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 18:05:07 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:32:24 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*process_quote(char *line)
 	else
 	{
 		str_len = pos - (line + 1);
-		sub_str = ft_substr(line + 1, 0, str_len); 
+		sub_str = ft_substr(line + 1, 0, str_len);
 		if (sub_str == NULL)
 			return (FAIL);
 	}
