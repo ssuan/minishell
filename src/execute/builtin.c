@@ -3,14 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 02:15:20 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 13:37:02 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+static void fork_builtin(t_cmd *tcmd)
+{
+	pid_t	pid;
+
+	g_state.fork = 1;
+	pid = fork();
+	if (pid == 0)
+	{
+		set_pipe();
+		builtin(tcmd);
+		exit(g_state.exit_status);
+	}
+	else
+	{
+		if (g_state.backup_cnt != 1)
+		{
+			close(g_state.pipe_set[0][0]);
+			close(g_state.pipe_set[0][1]);
+		}
+	}
+}
+
+void	builtin_div(t_cmd *tcmd)
+{
+	t_node	*cur_node;
+	
+	cur_node = tcmd->node;
+	if (!ft_strcmp(cur_node->str, "pwd") || \
+		!ft_strcmp(cur_node->str, "echo") || \
+		!ft_strcmp(cur_node->str, "env"))
+	{
+		fork_builtin(tcmd);
+	}
+	else if (!ft_strcmp(cur_node->str, "exit"))
+	{
+		builtin(tcmd);	
+	}
+	else if (tcmd->next && !ft_strcmp(cur_node->str, "export"))
+	{
+		fork_builtin(tcmd);
+	}
+	else if (!ft_strcmp(cur_node->str, "cd") || \
+			!ft_strcmp(cur_node->str, "export") || \
+			(!ft_strcmp(cur_node->str, "unset") && g_state.cmd_cnt == 1))
+	{
+		set_pipe();
+		builtin(tcmd);
+	}
+}
 
 void	builtin(t_cmd *cmd)
 {

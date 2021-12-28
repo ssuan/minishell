@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/28 11:48:12 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:10:06 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,19 +148,21 @@ char	*get_value(char *str);
 void	env_update(char *key, char *value);
 
 /* execute */
-int	pre_execute(t_cmd *cmd);
+int		pre_execute(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 int		is_builtin(t_cmd *cmd);
+void	builtin_div(t_cmd *tcmd);
 void	builtin(t_cmd *cmd);
 void	non_builtin(t_cmd *cmd);
 
 /* redirect */
-int	connect_redirect(t_cmd *cmd);
+int		sconnect_redirect(t_cmd *cmd);
 int		redirect_in(char *file);
 int		redirect_out(char *file);
 int		redirect_out_append(char *file);
 void	here_doc(t_cmd *cmd);
 void	connect_pipe(int fd[2], int io);
+void	set_pipe(void);
 
 /* parsing */
 t_node	*parse_line(char *line);

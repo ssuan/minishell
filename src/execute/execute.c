@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 11:50:43 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:09:35 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	execute_cmd(t_cmd *cmd)
 	if (g_state.exit_status == 1 && g_state.redir_in == -1)
 		return ;
 	if (is_builtin(cmd))
-		builtin(cmd);
+		builtin_div(cmd);
 	else
 		non_builtin(cmd);
 }
