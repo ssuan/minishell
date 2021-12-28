@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 13:59:27 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:51:58 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ int	connect_redirect(t_cmd *cmd)
 		if (redir_check && cur_tcmd->next == NULL)
 		{
 			ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
+			g_state.exit_status = 258;
+			return (FAIL);
+		}
+		if (redir_check && cur_tcmd->next->node->flag >= 3)
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+			ft_putstr_fd(cur_tcmd->next->node->str, 2);
+			ft_putstr_fd("'\n", 2);
 			g_state.exit_status = 258;
 			return (FAIL);
 		}

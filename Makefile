@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 14:05:19 by suan              #+#    #+#              #
-#    Updated: 2021/12/28 11:51:56 by sunbchoi         ###   ########.fr        #
+#    Updated: 2021/12/28 14:42:30 by suan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-READLINE_LIB  = -lreadline# -L/usr/local/opt/readline/lib
-READLINE_INC = #-I/usr/local/opt/readline/include
+READLINE_LIB  = -lreadline -L/usr/local/opt/readline/lib
+READLINE_INC = -I/usr/local/opt/readline/include
 
 SRC_DIR = src/
 
