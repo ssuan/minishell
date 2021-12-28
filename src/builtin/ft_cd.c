@@ -6,13 +6,25 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:02:52 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 18:09:09 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 18:28:44 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	cd_home(void)
+static int	check_pipe(t_cmd *cmd, char **old)
+{
+	if ((cmd->next && cmd->next->node->flag == PIPE)
+		|| (cmd->prev && cmd->prev->node->flag == PIPE))
+	{
+		chdir(*old);
+		free(*old);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+static int	cd_home(t_cmd *cmd)
 {
 	char	*path;
 	char	*old;
@@ -30,13 +42,15 @@ static int	cd_home(void)
 		free(old);
 		return (1);
 	}
+	if (check_pipe(cmd, &old) == TRUE)
+		return (0);
 	env_update("PWD", path);
 	env_update("OLDPWD", old);
 	free(old);
 	return (0);
 }
 
-static int	cd_oldpwd(void)
+static int	cd_oldpwd(t_cmd *cmd)
 {
 	char	*path;
 	char	*old;
@@ -54,13 +68,15 @@ static int	cd_oldpwd(void)
 		free(old);
 		return (1);
 	}
+	if (check_pipe(cmd, &old) == TRUE)
+		return (0);
 	env_update("PWD", path);
 	env_update("OLDPWD", old);
 	free(old);
 	return (0);
 }
 
-static int	cd_path(char *path)
+static int	cd_path(t_cmd *cmd, char *path)
 {
 	char	*old;
 	int		ret;
@@ -73,29 +89,30 @@ static int	cd_path(char *path)
 		free(old);
 		return (1);
 	}
+	if (check_pipe(cmd, &old) == TRUE)
+		return (0);
 	env_update("PWD", path);
 	env_update("OLDPWD", old);
 	free(old);
 	return (0);
 }
 
-// | 처리
 int	ft_cd(t_cmd *cmd)
 {
 	char	*path;
 
 	if (cmd->size == 1)
-		return (cd_home());
+		return (cd_home(cmd));
 	path = cmd->node->next->str;
 	if (ft_strlen(path) == 0)
-		return (cd_home());
+		return (cd_home(cmd));
 	if (!ft_strcmp(path, "-") || !ft_strcmp(path, "--"))
-		return (cd_oldpwd());
+		return (cd_oldpwd(cmd));
 	if (*path == '-' && ft_strlen(path) > 1)
 	{
 		print_error2("cd", path + 1, "invalid option");
 		print_error2("cd", "usage", "cd [dir]");
 		return (1);
 	}
-	return (cd_path(path));
+	return (cd_path(cmd, path));
 }
