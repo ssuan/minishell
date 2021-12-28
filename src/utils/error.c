@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:43:31 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 18:29:31 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:36:38 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	error(char *msg, int status)
-{
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	if (status == TRUE)
-		exit(1);
-}
 
 void	print_error(char *command, char *msg)
 {
@@ -59,4 +51,11 @@ void	print_error3(char *command, char *input, char *msg)
 	ft_putstr_fd("\': ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
+}
+
+void	print_error_token(char *token)
+{
+	ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+	ft_putstr_fd(token, 2);
+	ft_putstr_fd("\'\n", 2);
 }

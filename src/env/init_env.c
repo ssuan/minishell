@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:16:32 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/16 18:27:56 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:31:48 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	env_seting(char **envp)
 	{
 		g_state.env[loop] = ft_strdup(envp[loop]);
 		if (g_state.env[loop] == NULL)
-			error(STR_ENV_SETTING_ERR, TRUE);
+			exit(1);
 		loop++;
 	}
 	return (SUCCESS);

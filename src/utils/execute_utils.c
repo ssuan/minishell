@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:03:55 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:54:49 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:53:10 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,21 @@ char	**set_cmds(t_cmd *cmd)
 		i++;
 	}
 	return (cmds);
+}
+
+int	check_redir_token(t_cmd *cur_tcmd)
+{
+	if (cur_tcmd->next == NULL)
+	{
+		print_error_token("newline");
+		g_state.exit_status = 258;
+		return (FAIL);
+	}
+	if (cur_tcmd->next->node->flag >= 3)
+	{
+		print_error_token(cur_tcmd->next->node->str);
+		g_state.exit_status = 258;
+		return (FAIL);
+	}
+	return (SUCCESS);
 }

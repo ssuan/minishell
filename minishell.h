@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/28 15:06:08 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:52:35 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@
 
 # define TRUE 1
 # define FALSE 0
-
-# define STR_ENV_SETTING_ERR "Minishell is failed to set\
-							environmental variables."
 
 # define COLOR_NORMAL "\033[0m"
 # define COLOR_RED "\033[31m"
@@ -118,6 +115,7 @@ int		free_arr2(char **s);
 char	*find_path(char *cmd);
 int		check_space(char *s);
 char	**set_cmds(t_cmd *cmd);
+int		check_redir_token(t_cmd *cur_tcmd);
 
 /* builtin */
 void	ft_exit(t_cmd *cmd);
@@ -169,10 +167,10 @@ int		cmd_connect_break(t_cmd *tcmd);
 t_cmd	*node_to_cmd(t_node *node);
 
 /* error */
-void	error(char *msg, int status);
 void	print_error(char *command, char *msg);
 void	print_error_exit(char *command, char *msg, int exit_status);
 void	print_error2(char *command, char *input, char *msg);
 void	print_error3(char *command, char *input, char *msg);
+void	print_error_token(char *token);
 
 #endif
