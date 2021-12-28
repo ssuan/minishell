@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:19:18 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/20 14:55:47 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 11:51:33 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	redirect_in(char *file)
 
 int	redirect_out(char *file)
 {
+	printf("IN");
 	g_state.redir_out = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (g_state.redir_out < 0)
 	{
@@ -48,7 +49,7 @@ int	redirect_out_append(char *file)
 	return (EXIT_SUCCESS);
 }
 
-// void	here_doc(t_node *node)
+// void	here_doc(t_cmd *tcmd)
 // {
 // 	int			fd[2];
 // 	char		*buf;
@@ -62,7 +63,7 @@ int	redirect_out_append(char *file)
 // 		write(1, "> ", 2);
 // 		while (get_next_line(1, &buf))
 // 		{
-// 			if (!ft_strcmp(buf, node->contents))
+// 			if (!ft_strcmp(buf, tcmd->node->str))
 // 				exit(0);
 // 			write(1, "> ", 2);
 // 			ft_putendl_fd(buf, fd[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   non_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:41 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 15:15:21 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 11:45:31 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,42 @@ static void	exec_cmd(t_cmd *cmd)
 		print_error_exit(cmd->node->str, "command not found", 127);
 }
 
+
+void	set_pipe(void)
+{
+	if (g_state.backup_cnt != 1 && g_state.redir_in == 0 && \
+		g_state.exit_status != -1)
+		connect_pipe(g_state.pipe_set[0], STDIN_FILENO);
+	if (g_state.backup_cnt < g_state.cmd_cnt && g_state.redir_out == 1 && \
+		g_state.exit_status != -1)
+		connect_pipe(g_state.pipe_set[1], STDOUT_FILENO);
+	if (g_state.redir_in != 0)
+	{
+		dup2(g_state.redir_in, STDIN_FILENO);
+		close(g_state.redir_in);
+	}
+	if (g_state.redir_out != 1)
+	{
+		dup2(g_state.redir_out, STDOUT_FILENO);
+		close(g_state.redir_out);
+	}
+}
+
 // 리다이렉트 처리, 에러메시지 수정
 void	non_builtin(t_cmd *cmd)
 {
 	pid_t	pid;
 	int		status;
 
+	g_state.fork = 1;
 	pid = fork();
 	if (pid < -1)
 		return ;
 	if (pid == 0)
+	{
+		set_pipe();
 		exec_cmd(cmd);
+	}
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
