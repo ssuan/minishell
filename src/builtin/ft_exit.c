@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 13:54:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:42:19 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 17:48:47 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	check_digit(char *s)
 
 void	ft_exit(t_cmd *cmd)
 {
-	ft_putstr_fd("exit\n", 2);
 	if (cmd->size == 1)
 		g_state.exit_status = 0;
 	else if (cmd->size == 2 && check_digit(cmd->node->next->str))
@@ -46,5 +45,6 @@ void	ft_exit(t_cmd *cmd)
 	if ((cmd->next && cmd->next->node->flag == PIPE)
 		|| (cmd->prev && cmd->prev->node->flag == PIPE))
 		return ;
+	ft_putstr_fd("exit\n", 2);
 	exit(g_state.exit_status % 256);
 }
