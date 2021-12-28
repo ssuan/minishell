@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 16:09:21 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 17:46:27 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	builtin(t_cmd *tcmd)
 	}
 	else if (!ft_strcmp(cur_node->str, "exit"))
 	{
-		builtin(tcmd);
+		exec_builtin(tcmd);
 	}
 	else if (tcmd->next && !ft_strcmp(cur_node->str, "export"))
 	{
@@ -73,7 +73,7 @@ void	builtin(t_cmd *tcmd)
 			(!ft_strcmp(cur_node->str, "unset") && g_state.cmd_cnt == 1))
 	{
 		set_pipe();
-		builtin(tcmd);
+		exec_builtin(tcmd);
 	}
 }
 
