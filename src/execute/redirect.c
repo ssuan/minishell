@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:19:18 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/28 11:51:33 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:47:34 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	redirect_in(char *file)
 
 int	redirect_out(char *file)
 {
-	printf("IN");
 	g_state.redir_out = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (g_state.redir_out < 0)
 	{
@@ -39,6 +38,7 @@ int	redirect_out(char *file)
 
 int	redirect_out_append(char *file)
 {
+	printf("APPEND IN");
 	g_state.redir_out = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (g_state.redir_out < 0)
 	{

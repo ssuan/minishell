@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 13:09:35 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 13:59:27 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	connect_redirect(t_cmd *cmd)
 			redirect_out(cur_tcmd->next->node->str);
 		else if (cur_node->flag == REDIR_IN)
 			redirect_in(cur_tcmd->next->node->str);
-		else if (cur_node->flag == REDIR_IN_A)
+		else if (cur_node->flag == REDIR_OUT_A)
 			redirect_out_append(cur_tcmd->next->node->str);
-		// else if (cur_node->flag == REDIR_OUT_A)
+		// else if (cur_node->flag == REDIR_IN_A)
 		//  	here_doc(cur_tcmd->next);
 		cur_tcmd = cur_tcmd->next;
 	}

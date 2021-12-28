@@ -1,0 +1,10 @@
+Makefile
+README.md
+libft
+main.c
+main.o
+minishell
+minishell.h
+src
+temp.txt
+tt.txt
