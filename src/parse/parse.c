@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 16:18:51 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/27 18:33:12 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 16:37:01 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	logic_specifi(char **line, char **save_str, t_node *line_node)
 		&& parse_redir(line, save_str, line_node) == 0)
 		return (FAIL);
 	else if ((**line == '\'' || **line == '\"')
-		&& parse_quote(line, save_str, line_node) == 0)
+		&& parse_quote(line, save_str) == 0)
 		return (FAIL);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/28 16:02:22 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 16:36:59 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	set_pipe(void);
 /* parsing */
 t_node	*parse_line(char *line);
 int		parse_space(char **line, char **save_str, t_node *line_node);
-int		parse_quote(char **line, char **save_str, t_node *line_node);
+int		parse_quote(char **line, char **save_str);
 int		parse_pipe(char **line, char **save_str, t_node *line_node);
 int		parse_redir(char **line, char **save_str, t_node *line_node);
 int		save_str_node(t_node *node, char **save_str);

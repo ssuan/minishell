@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:30:32 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 18:11:48 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 16:31:30 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	process_redir(t_node *node, char *line, char *save_str)
+static int	process_redir(t_node *node, char *line, char *save_str)
 {
 	char	*node_str;
 

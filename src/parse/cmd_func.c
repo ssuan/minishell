@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:49:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/21 18:28:28 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 17:09:16 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_cmd	*process_cmd_logic(t_node **node, t_cmd **tcmd)
+static t_cmd	*process_cmd_logic(t_node **node, t_cmd **tcmd)
 {
 	t_cmd	*cur_tcmd;
 	t_cmd	*nxt_tcmd;

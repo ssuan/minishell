@@ -6,13 +6,13 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/27 18:32:24 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 16:38:18 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*process_quote(char *line)
+static char	*process_quote(char *line)
 {
 	char	*pos;
 	int		str_len;
@@ -34,12 +34,11 @@ char	*process_quote(char *line)
 	return (sub_str);
 }
 
-int	parse_quote(char **line, char **save_str, t_node *line_node)
+int	parse_quote(char **line, char **save_str)
 {
 	char	*sub_str;
 	char	*free_str;
 
-	(void)line_node;
 	if (**line == '\'')
 		g_state.flag = SQUOTE;
 	if (**line == '\"')
