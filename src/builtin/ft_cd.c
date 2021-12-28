@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:02:52 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:29:59 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:56:33 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	cd_home(void)
+static int	cd_home(void)
 {
 	char	*path;
 	char	*old;
@@ -36,7 +36,7 @@ int	cd_home(void)
 	return (0);
 }
 
-int	cd_oldpwd(void)
+static int	cd_oldpwd(void)
 {
 	char	*path;
 	char	*old;
@@ -60,7 +60,7 @@ int	cd_oldpwd(void)
 	return (0);
 }
 
-int	cd_path(char *path)
+static int	cd_path(char *path)
 {
 	char	*old;
 	int		ret;

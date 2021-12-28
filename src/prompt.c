@@ -6,13 +6,13 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 15:07:26 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 16:10:24 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_line(char **line)
+static void	get_line(char **line)
 {
 	*line = readline("\033[34mminishell$ \033[0m");
 	if (*line == NULL)

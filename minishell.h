@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/28 15:52:35 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 16:02:22 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	env_update(char *key, char *value);
 int		pre_execute(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 int		is_builtin(t_cmd *cmd);
-void	builtin_div(t_cmd *tcmd);
 void	builtin(t_cmd *cmd);
 void	non_builtin(t_cmd *cmd);
 
