@@ -55,13 +55,11 @@ void print_cmd(t_cmd *tcmd)
 {
 	t_cmd *cur_tcmd;
 	t_node *cur_node;
-	int loop;
 
 	cur_tcmd = tcmd;
 	while (cur_tcmd != 0)
 	{
 		cur_node = cur_tcmd->node;
-		loop = 0;
 		//printf("ad:%p ", cur_node);
 		while (cur_node != NULL)
 		{

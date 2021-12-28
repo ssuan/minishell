@@ -68,8 +68,8 @@ int	connect_redirect(t_cmd *cmd)
 			redirect_in(cur_tcmd->next->node->str);
 		else if (cur_node->flag == REDIR_OUT_A)
 			redirect_out_append(cur_tcmd->next->node->str);
-		// else if (cur_node->flag == REDIR_IN_A)
-		//  	here_doc(cur_tcmd->next);
+		else if (cur_node->flag == REDIR_IN_A)
+		 	here_doc(cur_tcmd->next);
 		cur_tcmd = cur_tcmd->next;
 	}
 	return (SUCCESS);
@@ -98,7 +98,6 @@ void
 	g_state.backup_cnt++;
 }
 
-// 파이프, 리다이렉션 처리
 void	execute(t_cmd *cmd)
 {
 	int		fd_stdin;

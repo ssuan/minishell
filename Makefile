@@ -16,12 +16,15 @@ NAME = minishell
 LIBFT = libft
 LIBFT_LIB = libft.a
 
+GNL = get_next_line
+GNL_LIB = get_next_line.a
+
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-READLINE_LIB  = -lreadline -L/usr/local/opt/readline/lib
-READLINE_INC = -I/usr/local/opt/readline/include
+READLINE_LIB  = -lreadline# -L/usr/local/opt/readline/lib
+READLINE_INC = #-I/usr/local/opt/readline/include
 
 SRC_DIR = src/
 
@@ -53,15 +56,18 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make all -C $(LIBFT)/
-	$(CC) $(CFLAGS) $(OBJS) $(INC) $(READLINE_INC) $(READLINE_LIB) $(LIBFT)/$(LIBFT_LIB) -o $(NAME) 
+	make all -C $(GNL)/
+	$(CC) $(CFLAGS) $(OBJS) $(INC) $(READLINE_INC) $(READLINE_LIB) $(LIBFT)/$(LIBFT_LIB) $(GNL)/$(GNL_LIB) -o $(NAME) 
 
 clean:
 	$(RM) $(OBJS)
 	make clean -C $(LIBFT)
+	make clean -C $(GNL)
 
 fclean: clean
 	$(RM) $(NAME)
 	make fclean -C $(LIBFT)
+	make fclean -C $(GNL)
 
 re: clean all
 
