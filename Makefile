@@ -6,7 +6,7 @@
 #    By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 14:05:19 by suan              #+#    #+#              #
-#    Updated: 2021/12/27 18:28:30 by suan             ###   ########.fr        #
+#    Updated: 2021/12/28 14:56:35 by suan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,9 @@ NAME = minishell
 
 LIBFT = libft
 LIBFT_LIB = libft.a
+
+GNL = get_next_line
+GNL_LIB = get_next_line.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -56,15 +59,18 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make all -C $(LIBFT)/
-	$(CC) $(CFLAGS) $(OBJS) $(INC) $(READLINE_INC) $(READLINE_LIB) $(LIBFT)/$(LIBFT_LIB) -o $(NAME) 
+	make all -C $(GNL)/
+	$(CC) $(CFLAGS) $(OBJS) $(INC) $(READLINE_INC) $(READLINE_LIB) $(LIBFT)/$(LIBFT_LIB) $(GNL)/$(GNL_LIB) -o $(NAME) 
 
 clean:
 	$(RM) $(OBJS)
 	make clean -C $(LIBFT)
+	make clean -C $(GNL)
 
 fclean: clean
 	$(RM) $(NAME)
 	make fclean -C $(LIBFT)
+	make fclean -C $(GNL)
 
 re: clean all
 

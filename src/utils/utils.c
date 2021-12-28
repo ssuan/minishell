@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 17:20:05 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 14:26:09 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:00:23 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,4 @@ int	check_space(char *s)
 	if (space == (int)ft_strlen(s))
 		return (1);
 	return (0);
-}
-
-int	cmd_space_check(t_cmd *tcmd)
-{
-	t_cmd	*cur_cmd;
-	char	*str;
-	char	*check;
-
-	cur_cmd = tcmd;
-	while (cur_cmd != NULL)
-	{
-		str = cur_cmd->node->str;
-		check = ft_strchr(str, ' ');
-		if (check != NULL)
-		{
-			printf("%sspace error%s\n", COLOR_RED, COLOR_NORMAL);
-			return (FAIL);
-		}
-		cur_cmd = cur_cmd->next;
-	}
-	return (SUCCESS);
 }

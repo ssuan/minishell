@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/27 18:30:19 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:06:08 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/types.h> 
 # include <fcntl.h>
 # include "./libft/libft.h"
+# include "./get_next_line/get_next_line.h"
 
 # define FAIL 0
 # define SUCCESS 1
@@ -33,7 +34,6 @@
 
 # define STR_ENV_SETTING_ERR "Minishell is failed to set\
 							environmental variables."
-# define SPACE_CORDSET "\t\v"
 
 # define COLOR_NORMAL "\033[0m"
 # define COLOR_RED "\033[31m"
@@ -76,7 +76,6 @@ typedef struct s_state
 	int		env_len;
 	int		exit_status;
 	int		flag;
-	// FIX
 	int		cmd_cnt;
 	int		backup_cnt;
 	int		pipe_set[2][2];
@@ -86,13 +85,6 @@ typedef struct s_state
 }	t_state;
 
 t_state	g_state;
-
-t_cmd	*node_to_cmd(t_node *node);
-
-int		cmd_space_check(t_cmd *tcmd);
-
-void	print_node(t_node *line_node);
-void	print_cmd(t_cmd *tcmd);
 
 /* NODE */
 t_node	*ft_nodenew(void *content, int flag);
@@ -121,8 +113,7 @@ t_cmd	*ft_cmdmap(t_cmd *cmd, void *(*f)(void *),
 void	set_signal(void);
 void	prompt(void);
 
-void	print_export(void);
-
+/* utils */
 int		free_arr2(char **s);
 char	*find_path(char *cmd);
 int		check_space(char *s);
@@ -138,6 +129,7 @@ int		ft_unset(t_cmd *cmd);
 int		ft_cd(t_cmd *cmd);
 
 /* env */
+void	print_export(void);
 int		init_env(int argc, char **argv, char **envp);
 void	get_env(t_cmd *cmd);
 char	*find_value(char *key);
@@ -149,6 +141,7 @@ void	env_update(char *key, char *value);
 int		pre_execute(t_cmd *cmd);
 void	execute(t_cmd *cmd);
 int		is_builtin(t_cmd *cmd);
+void	builtin_div(t_cmd *tcmd);
 void	builtin(t_cmd *cmd);
 void	non_builtin(t_cmd *cmd);
 
@@ -159,6 +152,7 @@ int		redirect_out(char *file);
 int		redirect_out_append(char *file);
 void	here_doc(t_cmd *cmd);
 void	connect_pipe(int fd[2], int io);
+void	set_pipe(void);
 
 /* parsing */
 t_node	*parse_line(char *line);
@@ -172,8 +166,7 @@ int		free_node(t_node *node);
 int		free_cmd(t_cmd *tcmd);
 t_cmd	*parsing(char *line);
 int		cmd_connect_break(t_cmd *tcmd);
-void	set_signal(void);
-int		check_space(char *s);
+t_cmd	*node_to_cmd(t_node *node);
 
 /* error */
 void	error(char *msg, int status);

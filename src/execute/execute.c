@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 18:56:03 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 14:51:58 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	connect_redirect(t_cmd *cmd)
 	cur_tcmd = cmd;
 	cur_node = cur_tcmd->node;
 	redir_check = 0;
+	g_state.redir_in = 0;
+	g_state.redir_out = 1;
 	while (cur_tcmd && redir_check == 0)
 	{
 		cur_node = cur_tcmd->node;
@@ -60,14 +62,22 @@ int	connect_redirect(t_cmd *cmd)
 			g_state.exit_status = 258;
 			return (FAIL);
 		}
+		if (redir_check && cur_tcmd->next->node->flag >= 3)
+		{
+			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+			ft_putstr_fd(cur_tcmd->next->node->str, 2);
+			ft_putstr_fd("'\n", 2);
+			g_state.exit_status = 258;
+			return (FAIL);
+		}
 		if (cur_node->flag == REDIR_OUT)
 			redirect_out(cur_tcmd->next->node->str);
 		else if (cur_node->flag == REDIR_IN)
 			redirect_in(cur_tcmd->next->node->str);
-		else if (cur_node->flag == REDIR_IN_A)
+		else if (cur_node->flag == REDIR_OUT_A)
 			redirect_out_append(cur_tcmd->next->node->str);
-		// else if (cur_node->flag == REDIR_OUT_A)
-		//  	here_doc(cur_node->next);
+		else if (cur_node->flag == REDIR_IN_A)
+		 	here_doc(cur_tcmd->next);
 		cur_tcmd = cur_tcmd->next;
 	}
 	return (SUCCESS);
@@ -75,17 +85,32 @@ int	connect_redirect(t_cmd *cmd)
 
 void	execute_cmd(t_cmd *cmd)
 {
+	connect_redirect(cmd);
+	if (g_state.exit_status == 1 && g_state.redir_in == -1)
+		return ;
 	if (is_builtin(cmd))
-		builtin(cmd);
+		builtin_div(cmd);
 	else
 		non_builtin(cmd);
 }
 
-// 파이프, 리다이렉션 처리
+void
+	backup_execute(int *stdin, int *stdout)
+{
+	g_state.pipe_set[0][0] = g_state.pipe_set[1][0];
+	g_state.pipe_set[0][1] = g_state.pipe_set[1][1];
+	dup2(*stdin, STDIN_FILENO);
+	dup2(*stdout, STDOUT_FILENO);
+	close(*stdin);
+	close(*stdout);
+	g_state.backup_cnt++;
+}
+
 void	execute(t_cmd *cmd)
 {
 	int		fd_stdin;
 	int		fd_stdout;
+	int		status;
 	t_cmd	*cur_tcmd;
 	
 	if (pre_execute(cmd) == FAIL)
@@ -97,16 +122,19 @@ void	execute(t_cmd *cmd)
 		fd_stdout = dup(STDOUT_FILENO);		
 		if (g_state.cmd_cnt > 1)
 			pipe(g_state.pipe_set[1]);
-		if (connect_redirect(cur_tcmd) == FAIL)
-			return ;
-		
-		if (g_state.exit_status == 1 && g_state.redir_in == -1)
-			return ;
-			
 		execute_cmd(cur_tcmd);
+		backup_execute(&fd_stdin, &fd_stdout);
 		while (cur_tcmd != 0 && cur_tcmd->next != 0
 			&& cur_tcmd->node->flag != PIPE)
 			cur_tcmd = cur_tcmd->next;
 		cur_tcmd = cur_tcmd->next;
+	}
+	if (g_state.fork)
+	{
+		while (waitpid(-1, &status, 0) > 0)
+		{
+			if (WIFEXITED(status))
+				g_state.exit_status = WEXITSTATUS(status);
+		}
 	}
 }
