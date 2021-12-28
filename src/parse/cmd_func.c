@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 19:49:22 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/28 17:19:00 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/28 17:20:53 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_cmd	*process_cmd_logic(t_node **node, t_cmd **tcmd)
 	return (cur_tcmd);
 }
 
-static void set_empty_tcmd(t_cmd **tcmd, t_node **node)
+static void	set_empty_tcmd(t_cmd **tcmd, t_node **node)
 {
 	t_cmd	*nxt_tcmd;
 
