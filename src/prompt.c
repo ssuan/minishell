@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/29 17:59:05 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 18:02:03 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	get_line(char **line)
 void	launch_minishell(char *line)
 {
 	t_cmd	*tcmd;
-	
+
 	if (!check_space(line))
 	{
 		tcmd = parsing(line);
