@@ -6,13 +6,13 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 14:16:32 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/28 15:57:28 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:52:03 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	env_seting(char **envp)
+int	init_env(char **envp)
 {
 	int	loop;
 
@@ -31,13 +31,5 @@ static int	env_seting(char **envp)
 			exit(1);
 		loop++;
 	}
-	return (SUCCESS);
-}
-
-int	init_env(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	env_seting(envp);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/28 16:36:59 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:59:15 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ t_cmd	*ft_cmdmap(t_cmd *cmd, void *(*f)(void *),
 
 void	set_signal(void);
 void	prompt(void);
+void	launch_minishell(char *line);
 
 /* utils */
 int		free_arr2(char **s);
@@ -128,7 +129,7 @@ int		ft_cd(t_cmd *cmd);
 
 /* env */
 void	print_export(void);
-int		init_env(int argc, char **argv, char **envp);
+int		init_env(char **envp);
 void	get_env(t_cmd *cmd);
 char	*find_value(char *key);
 char	*get_key(char *str);
