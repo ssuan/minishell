@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:41 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 15:11:02 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 20:15:42 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	exec_cmd(t_cmd *cmd)
 	char	*path;
 	int		ret;
 
+	if (!ft_strcmp(cmd->node->str, "."))
+		print_error_exit(cmd->node->str, "filename argument required", 2);
 	if (ft_strchr(cmd->node->str, '/'))
 		exec_file(cmd->node->str);
 	path = find_path(cmd->node->str);

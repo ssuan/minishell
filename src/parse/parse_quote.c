@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/28 16:38:18 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 21:56:25 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	parse_quote(char **line, char **save_str)
 		*save_str = ft_strdup("");
 	free_str = *save_str;
 	*line += ft_strlen(sub_str) + 1 + 1;
+	get_env(&sub_str, g_state.flag);
 	*save_str = ft_strjoin(*save_str, sub_str);
 	free(sub_str);
 	free(free_str);

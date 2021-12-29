@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 23:42:52 by minjkim2          #+#    #+#             */
-/*   Updated: 2021/12/29 17:59:15 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 21:55:52 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int		ft_cd(t_cmd *cmd);
 /* env */
 void	print_export(void);
 int		init_env(char **envp);
-void	get_env(t_cmd *cmd);
+void	get_env(char **str, int flag);
 char	*find_value(char *key);
 char	*get_key(char *str);
 char	*get_value(char *str);

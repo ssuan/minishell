@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 23:02:34 by suan              #+#    #+#             */
-/*   Updated: 2021/12/21 14:20:42 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 20:32:30 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_key(char *key)
 	if (!ft_isalpha(*key) && *key != '_')
 		return (FALSE);
 	i = 1;
-	while (key[i] && key[i] != '=')
+	while (key[i])
 	{
 		if (!ft_isalnum(key[i]) && key[i] != '_')
 			return (FALSE);

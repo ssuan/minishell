@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:06:42 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 00:54:41 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 20:40:50 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_opt_n(char *opt)
 		++opt;
 	else
 		return (FALSE);
-	while (*opt && *opt != ' ')
+	while (*opt)
 	{
 		if (*opt == 'n')
 			++opt;
@@ -46,9 +46,9 @@ int	ft_echo(t_cmd *cmd)
 	while (curr)
 	{
 		ft_putstr_fd(curr->str, 1);
-		curr = curr->next;
-		if (curr)
+		if (*(curr->str) && curr->next)
 			ft_putchar_fd(' ', 1);
+		curr = curr->next;
 	}
 	if (!opt)
 		ft_putchar_fd('\n', 1);
