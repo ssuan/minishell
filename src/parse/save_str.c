@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:41:08 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/29 22:01:21 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:31:24 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ int	save_str_join(char **line, char **save_str)
 {
 	char	*free_str;
 	char	*tmp_str;
+	int		i;
 
 	if (*save_str == NULL)
 		*save_str = ft_strdup("");
 	if (*save_str == NULL)
 		return (0);
 	free_str = *save_str;
-	tmp_str = (char *)ft_calloc(2, sizeof(char));
-
-	get_env(line, g_state.flag);
-	tmp_str[0] = **line;
+	i = 0;
+	while (!ft_strchr(" |\'\"<>", (*line)[i]))
+		++i;
+	tmp_str = (char *)ft_calloc(i + 1, sizeof(char));
+	ft_strlcpy(tmp_str, *line, i + 1);
+	get_env(&tmp_str, g_state.flag);
 	*save_str = ft_strjoin(*save_str, tmp_str);
-	(*line)++;
+	*line += i;
 	free(free_str);
 	free(tmp_str);
 	return (SUCCESS);

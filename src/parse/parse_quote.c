@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/29 21:56:25 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/30 01:25:02 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	parse_quote(char **line, char **save_str)
 		if (*save_str)
 		{
 			free(*save_str);
-			*save_str = 0;
+			*save_str = NULL;
 		}
 		return (FAIL);
 	}
 	if (*save_str == NULL)
-		*save_str = ft_strdup("");
+		*save_str = ft_strdup("");	
 	free_str = *save_str;
 	*line += ft_strlen(sub_str) + 1 + 1;
 	get_env(&sub_str, g_state.flag);

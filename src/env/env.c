@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 20:58:39 by suan              #+#    #+#             */
-/*   Updated: 2021/12/16 17:32:30 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:32:41 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*find_value(char *key)
 	key_len = ft_strlen(key);
 	while (g_state.env[i] != 0)
 	{
-		if (!ft_strncmp(g_state.env[i], key, key_len))
+		if (!ft_strncmp(g_state.env[i], key, key_len) && g_state.env[i][key_len] == '=')
 			return (g_state.env[i] + key_len + 1);
 		i++;
 	}
