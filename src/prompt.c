@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2021/12/29 22:34:47 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/30 12:53:47 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	launch_minishell(char *line)
 			free_cmd(tcmd);
 			return ;
 		}
-		//get_env(tcmd);
 		add_history(line);
 		execute(tcmd);
 		free_cmd(tcmd);

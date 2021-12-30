@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:28:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/30 02:04:17 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/30 13:36:42 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	check_home(char **str)
 	*str = ft_strjoin(s, *str + 1);
 }
 
+// 사용 후 free
 static char	*div_key(char *str)
 {
 	char	*key;
@@ -39,31 +40,42 @@ static char	*div_key(char *str)
 	return (key);
 }
 
+static int	check_var(char c, char **value)
+{
+	int	ret;
+
+	ret = 1;
+	if (!c || c == ' ')
+		*value = ft_strdup("$");
+	else if (ft_strchr("0123456789?$", c))
+	{
+		if (c == '?')
+			*value = ft_itoa(g_state.exit_status);
+		else if (c == '0')
+			*value = ft_strdup("minishell");
+		else
+			*value = ft_strdup("");
+		++ret;
+	}
+	return (ret);
+}
+
 static int	append_env(char *str, char **s, int i)
 {
 	char	*key;
 	char	*value;
 	char	*tmp;
+	int		ret;
 
-	if (!str[i])
-		value = ft_strdup("$");
-	else if (ft_strchr("0123456789?$", str[i + 1]))
-	{
-		if (str[i] == '?')
-			value = ft_itoa(g_state.exit_status);
-		else if (str[i] == '0')
-			value = ft_strdup("minishell");
-		else
-			value = ft_strdup("");
-		++i;
-	}
+	if (!str[i] || ft_strchr("0123456789?$ ", str[i]))
+		ret = check_var(str[i], &value);
 	else
 	{
 		key = div_key(str + i);
 		tmp = find_value(key);
 		if (!tmp)
 			tmp = "";
-		i += (ft_strlen(key));
+		ret = (ft_strlen(key) + 1);
 		free(key);
 		value = ft_strdup(tmp);
 	}
@@ -71,112 +83,45 @@ static int	append_env(char *str, char **s, int i)
 	free(*s);
 	free(value);
 	*s = tmp;
-	return (i);
+	return (ret);
 }
 
-// static void	check_env(char **str)
-// {
-// 	int		i;
-// 	char	*key;
-// 	char	*value;
-// 	char	*s;
-// 	char	*tmp;
+static int	append_char(char *str, char **s, int i)
+{
+	char	*tmp;
+	char	*value;
+	int		ret;
 
-// 	i = 0;
-// 	s = ft_strdup("");
-// 	while ((*str)[i])
-// 	{
-// 		if ((*str)[i] != '$')
-// 		{
-// 			while ((*str)[i] && (*str)[i] == '$')
-// 				++i;
-// 		}
-// 		if ((*str)[i] == '$')
-// 		{
-// 			if (!(*str)[i + 1])
-// 			{
-// 				value = ft_strdup("$");
-// 				tmp = ft_strjoin(s, value);
-// 				free(s);
-// 				free(value);
-// 				s = tmp;
-// 				break ;
-// 			}
-// 			if (ft_strchr("0123456789?$", (*str)[i + 1]))
-// 			{
-// 				if ((*str)[i + 1] == '?')
-// 					value = ft_itoa(g_state.exit_status);
-// 				else if ((*str)[i + 1] == '0')
-// 					value = ft_strdup("minishell");
-// 				else
-// 					value = ft_strdup("");
-// 				i += 2;
-// 			}
-// 			else
-// 			{
-// 				key = div_key(*str + i + 1);
-// 				tmp = find_value(key);
-// 				if (!tmp)
-// 					tmp = "";
-// 				i += (ft_strlen(key) + 1);
-// 				free(key);
-// 				value = ft_strdup(tmp);
-// 			}
-// 			tmp = ft_strjoin(s, value);
-// 			free(s);
-// 			free(value);
-// 			s = tmp;
-// 		}
-// 		while ((*str)[i] && (*str)[i] != '$')
-// 		{
-// 			value = ft_calloc(2, sizeof(char));
-// 			value[0] = (*str)[i];
-// 			++i;
-// 			tmp = ft_strjoin(s, value);
-// 			free(s);
-// 			free(value);
-// 			s = tmp;
-// 		}
-// 	}
-// 	free(*str);
-// 	*str = s;
-// }
+	ret = 1;
+	value = ft_calloc(2, sizeof(char));
+	value[0] = str[i];
+	tmp = ft_strjoin(*s, value);
+	free(*s);
+	free(value);
+	*s = tmp;
+	return (ret);
+}
 
 static void	check_env(char **str)
 {
 	int		i;
-	char	*value;
 	char	*s;
-	char	*tmp;
 
 	i = 0;
 	s = ft_strdup("");
 	while ((*str)[i])
 	{
-		if ((*str)[i] != '$')
-		{
-			while ((*str)[i] && (*str)[i] == '$')
-				++i;
-		}
 		if ((*str)[i] == '$')
 		{
 			if (!(*str)[i + 1])
 			{
-				i = append_env(*str, &s, i + 1);
+				i += append_env(*str, &s, i + 1);
 				break ;
 			}
-			i = append_env(*str, &s, i + 1);
+			i += append_env(*str, &s, i + 1);
 		}
 		while ((*str)[i] && (*str)[i] != '$')
-		{
-			value = ft_calloc(2, sizeof(char));
-			value[0] = (*str)[i];
-			++i;
-			tmp = ft_strjoin(s, value);
-			free(s);
-			free(value);
-			s = tmp;
-		}
+			i += append_char(*str, &s, i);
 	}
 	free(*str);
 	*str = s;
@@ -184,8 +129,8 @@ static void	check_env(char **str)
 
 void	get_env(char **str, int flag)
 {
-	if (flag == STRING && (*str)[0] == '~')
+	if (flag == STRING && (*str)[0] == '~' && (!(*str)[1] || (*str)[1] == '/'))
 		check_home(str);
-	if (flag == STRING || flag == DQUOTE)
+	else if (flag == STRING || flag == DQUOTE)
 		check_env(str);
 }

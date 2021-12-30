@@ -6,7 +6,7 @@
 /*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:06:42 by suan              #+#    #+#             */
-/*   Updated: 2021/12/29 20:40:50 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/30 13:47:03 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_echo(t_cmd *cmd)
 	while (curr)
 	{
 		ft_putstr_fd(curr->str, 1);
-		if (*(curr->str) && curr->next)
+		if (curr->next)
 			ft_putchar_fd(' ', 1);
 		curr = curr->next;
 	}
