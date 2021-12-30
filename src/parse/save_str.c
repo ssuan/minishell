@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 23:41:08 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/30 13:43:40 by suan             ###   ########.fr       */
+/*   Updated: 2021/12/30 18:23:31 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	save_str_node(t_node *node, char **save_str)
 {
 	char	*temp_str;
 
-	if (*save_str != NULL && **save_str != 0)
+	if (*save_str != NULL)
 	{
 		temp_str = ft_strdup(*save_str);
 		if (temp_str == NULL)
