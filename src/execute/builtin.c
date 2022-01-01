@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 17:46:27 by suan             ###   ########.fr       */
+/*   Updated: 2022/01/02 01:17:05 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ static void	fork_builtin(t_cmd *tcmd)
 		exec_builtin(tcmd);
 		exit(g_state.exit_status);
 	}
-	else if (g_state.backup_cnt != 1)
+	else
 	{
-		close(g_state.pipe_set[0][0]);
-		close(g_state.pipe_set[0][1]);
+		if (g_state.backup_cnt != 1)
+		{	
+			close(g_state.pipe_set[0][0]);
+			close(g_state.pipe_set[0][1]);
+		}
+		close(g_state.pipe_set[1][1]);
 	}
 }
 
