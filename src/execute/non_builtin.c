@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   non_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:41 by suan              #+#    #+#             */
-/*   Updated: 2021/12/30 01:36:29 by suan             ###   ########.fr       */
+/*   Updated: 2022/01/02 01:15:38 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	non_builtin(t_cmd *cmd)
 		set_pipe();
 		exec_cmd(cmd);
 	}
+	else
+		close(g_state.pipe_set[1][1]);
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))

@@ -6,7 +6,11 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:44 by suan              #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/01/02 20:24:53 by sunbchoi         ###   ########.fr       */
+=======
+/*   Updated: 2022/01/02 01:17:05 by sunbchoi         ###   ########.fr       */
+>>>>>>> 89505f9da6697a9e92d4de3966c2bd50773196c7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +46,14 @@ static void	fork_builtin(t_cmd *tcmd)
 		exec_builtin(tcmd);
 		exit(g_state.exit_status);
 	}
-	else if (g_state.backup_cnt != 1)
+	else
 	{
-		close(g_state.pipe_set[0][0]);
-		close(g_state.pipe_set[0][1]);
+		if (g_state.backup_cnt != 1)
+		{	
+			close(g_state.pipe_set[0][0]);
+			close(g_state.pipe_set[0][1]);
+		}
+		close(g_state.pipe_set[1][1]);
 	}
 }
 
