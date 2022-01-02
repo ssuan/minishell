@@ -34,7 +34,7 @@ static char	*process_quote(char *line)
 	return (sub_str);
 }
 
-void	quote_flag(char c)
+static void	quote_flag(char c)
 {
 	if (c == '\'')
 		g_state.flag = SQUOTE;

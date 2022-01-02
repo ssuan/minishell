@@ -23,23 +23,6 @@ static void	check_home(char **str)
 	*str = ft_strjoin(s, *str + 1);
 }
 
-// 사용 후 free
-static char	*div_key(char *str)
-{
-	char	*key;
-	int		i;
-
-	i = 0;
-	if (ft_isalpha(str[0]) || str[0] == '_')
-	{
-		while (ft_isalnum(str[i]))
-			++i;
-	}
-	key = ft_calloc(sizeof(char), i + 1);
-	ft_strlcpy(key, str, i + 1);
-	return (key);
-}
-
 static int	check_var(char c, char **value)
 {
 	int	ret;
@@ -79,22 +62,6 @@ static int	append_env(char *str, char **s, int i)
 		free(key);
 		value = ft_strdup(tmp);
 	}
-	tmp = ft_strjoin(*s, value);
-	free(*s);
-	free(value);
-	*s = tmp;
-	return (ret);
-}
-
-static int	append_char(char *str, char **s, int i)
-{
-	char	*tmp;
-	char	*value;
-	int		ret;
-
-	ret = 1;
-	value = ft_calloc(2, sizeof(char));
-	value[0] = str[i];
 	tmp = ft_strjoin(*s, value);
 	free(*s);
 	free(value);

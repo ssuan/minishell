@@ -84,3 +84,20 @@ void	env_update(char *key, char *value)
 	}
 	return ;
 }
+
+// 사용 후 free
+char	*div_key(char *str)
+{
+	char	*key;
+	int		i;
+
+	i = 0;
+	if (ft_isalpha(str[0]) || str[0] == '_')
+	{
+		while (ft_isalnum(str[i]))
+			++i;
+	}
+	key = ft_calloc(sizeof(char), i + 1);
+	ft_strlcpy(key, str, i + 1);
+	return (key);
+}

@@ -117,6 +117,7 @@ char	*find_path(char *cmd);
 int		check_space(char *s);
 char	**set_cmds(t_cmd *cmd);
 int		check_redir_token(t_cmd *cur_tcmd);
+int		append_char(char *str, char **s, int i);
 
 /* builtin */
 void	ft_exit(t_cmd *cmd);
@@ -135,6 +136,7 @@ char	*find_value(char *key);
 char	*get_key(char *str);
 char	*get_value(char *str);
 void	env_update(char *key, char *value);
+char	*div_key(char *str);
 
 /* execute */
 int		pre_execute(t_cmd *cmd);

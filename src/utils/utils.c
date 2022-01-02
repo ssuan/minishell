@@ -46,3 +46,19 @@ int	check_space(char *s)
 		return (1);
 	return (0);
 }
+
+int	append_char(char *str, char **s, int i)
+{
+	char	*tmp;
+	char	*value;
+	int		ret;
+
+	ret = 1;
+	value = ft_calloc(2, sizeof(char));
+	value[0] = str[i];
+	tmp = ft_strjoin(*s, value);
+	free(*s);
+	free(value);
+	*s = tmp;
+	return (ret);
+}
