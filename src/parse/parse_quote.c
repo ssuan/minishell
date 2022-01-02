@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 21:44:55 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/30 18:25:41 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2022/01/02 23:07:49 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,20 @@ static char	*process_quote(char *line)
 	return (sub_str);
 }
 
+void	quote_flag(char c)
+{
+	if (c == '\'')
+		g_state.flag = SQUOTE;
+	if (c == '\"')
+		g_state.flag = DQUOTE;
+}
+
 int	parse_quote(char **line, char **save_str)
 {
 	char	*sub_str;
 	char	*free_str;
 
-	if (**line == '\'')
-		g_state.flag = SQUOTE;
-	if (**line == '\"')
-		g_state.flag = DQUOTE;
+	quote_flag(**line);
 	sub_str = process_quote(*line);
 	if (!sub_str)
 	{
@@ -54,7 +59,7 @@ int	parse_quote(char **line, char **save_str)
 		return (FAIL);
 	}
 	if (*save_str == NULL)
-		*save_str = ft_strdup("");	
+		*save_str = ft_strdup("");
 	free_str = *save_str;
 	*line += ft_strlen(sub_str) + 1 + 1;
 	get_env(&sub_str, g_state.flag);

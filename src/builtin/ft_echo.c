@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 00:06:42 by suan              #+#    #+#             */
-/*   Updated: 2022/01/02 20:25:23 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2021/12/30 13:47:03 by suan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_echo(t_cmd *cmd)
 
 	opt = FALSE;
 	curr = NULL;
-	printf("size = %d\n",cmd->size);
 	if (cmd->size > 1)
 		curr = cmd->node->next;
 	while (curr && check_opt_n(curr->str))

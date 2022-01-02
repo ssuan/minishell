@@ -6,11 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:44 by suan              #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/02 20:24:53 by sunbchoi         ###   ########.fr       */
-=======
-/*   Updated: 2022/01/02 01:17:05 by sunbchoi         ###   ########.fr       */
->>>>>>> 89505f9da6697a9e92d4de3966c2bd50773196c7
+/*   Updated: 2022/01/02 23:04:50 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +45,7 @@ static void	fork_builtin(t_cmd *tcmd)
 	else
 	{
 		if (g_state.backup_cnt != 1)
-		{	
+		{
 			close(g_state.pipe_set[0][0]);
 			close(g_state.pipe_set[0][1]);
 		}
@@ -65,19 +61,14 @@ void	builtin(t_cmd *tcmd)
 	if (!ft_strcmp(cur_node->str, "pwd") || \
 		!ft_strcmp(cur_node->str, "echo") || \
 		!ft_strcmp(cur_node->str, "env"))
-	{
 		fork_builtin(tcmd);
-	}
 	else if (!ft_strcmp(cur_node->str, "exit"))
-	{
 		exec_builtin(tcmd);
-	}
-	else if (tcmd->next && (!ft_strcmp(cur_node->str, "export") || \
-			(!ft_strcmp(cur_node->str, "cd")) || \
-			(!ft_strcmp(cur_node->str, "export"))))
-	{
+	else if (tcmd->next && \
+			(!ft_strcmp(cur_node->str, "export") || \
+			!ft_strcmp(cur_node->str, "cd") || \
+			!ft_strcmp(cur_node->str, "unset")))
 		fork_builtin(tcmd);
-	}
 	else if (!ft_strcmp(cur_node->str, "cd") || \
 			!ft_strcmp(cur_node->str, "export") || \
 			(!ft_strcmp(cur_node->str, "unset") && g_state.cmd_cnt == 1))

@@ -6,7 +6,7 @@
 /*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:37:18 by suan              #+#    #+#             */
-/*   Updated: 2022/01/02 20:13:23 by sunbchoi         ###   ########.fr       */
+/*   Updated: 2022/01/02 22:29:05 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,6 @@ static void	get_line(char **line)
 	}
 }
 
-void 	print_tcmd(t_cmd *cmd)
-{
-	t_cmd	*cur;
-
-	cur = cmd;
-	while (cur != 0)
-	{
-		printf("%s ",cur->node->str);
-		cur = cur->next;
-	}
-	printf("\n");
-}
-
 void	launch_minishell(char *line)
 {
 	t_cmd	*tcmd;
@@ -44,13 +31,12 @@ void	launch_minishell(char *line)
 	if (!check_space(line))
 	{
 		tcmd = parsing(line);
-		print_tcmd(tcmd);
+		add_history(line);
 		if (!tcmd)
 		{
 			free_cmd(tcmd);
 			return ;
 		}
-		add_history(line);
 		execute(tcmd);
 		free_cmd(tcmd);
 	}

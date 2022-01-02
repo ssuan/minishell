@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 14:19:18 by sunbchoi          #+#    #+#             */
-/*   Updated: 2021/12/28 16:41:32 by suan             ###   ########.fr       */
+/*   Updated: 2022/01/02 22:20:13 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	here_doc(t_cmd *tcmd)
 void	connect_pipe(int fd[2], int io)
 {
 	dup2(fd[io], io);
-	close(fd[0]);
-	close(fd[1]);
+	if (io == 0)
+		close(fd[1]);
+	if (io == 1)
+		close(fd[0]);
 }

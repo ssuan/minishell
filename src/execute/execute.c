@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 17:16:04 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 16:09:39 by suan             ###   ########.fr       */
+/*   Updated: 2022/01/02 23:01:46 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	connect_redirect(t_cmd *cmd)
 void	execute_cmd(t_cmd *cmd)
 {
 	if (connect_redirect(cmd) == FAIL)
+		return ;
+	if (cmd->node->flag == REDIR_IN_A)
 		return ;
 	if (g_state.exit_status == 1 && g_state.redir_in == -1)
 		return ;
