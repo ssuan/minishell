@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: suan <suan@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: sunbchoi <sunbchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 02:14:44 by suan              #+#    #+#             */
-/*   Updated: 2021/12/28 17:46:27 by suan             ###   ########.fr       */
+/*   Updated: 2022/01/02 20:24:53 by sunbchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	builtin(t_cmd *tcmd)
 	{
 		exec_builtin(tcmd);
 	}
-	else if (tcmd->next && !ft_strcmp(cur_node->str, "export"))
+	else if (tcmd->next && (!ft_strcmp(cur_node->str, "export") || \
+			(!ft_strcmp(cur_node->str, "cd")) || \
+			(!ft_strcmp(cur_node->str, "export"))))
 	{
 		fork_builtin(tcmd);
 	}
