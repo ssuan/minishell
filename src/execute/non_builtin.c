@@ -13,26 +13,25 @@
 #include "../../minishell.h"
 
 //https://www.it-note.kr/173
-static void	exec_file(char *file)
+static void	exec_file(t_cmd *cmd)
 {
-	char		*cmd[2];
 	struct stat	s;
+	char		**cmdlines;
 
-	cmd[0] = file;
-	cmd[1] = 0;
-	if (stat(file, &s) == 0)
+	cmdlines = set_cmds(cmd);
+	if (stat(cmdlines[0], &s) == 0)
 	{
 		if (S_ISDIR(s.st_mode))
-			print_error_exit(cmd[0], "is a directory", 126);
+			print_error_exit(cmdlines[0], "is a directory", 126);
 		else if (S_ISREG(s.st_mode))
 		{
 			if (!(s.st_mode & S_IXUSR))
-				print_error_exit(cmd[0], "Permission denied", 126);
-			if (execve(file, cmd, g_state.env) == -1)
-				print_error_exit(cmd[0], "command not found", 127);
+				print_error_exit(cmdlines[0], "Permission denied", 126);
+			if (execve(cmdlines[0], cmdlines, g_state.env) == -1)
+				print_error_exit(cmdlines[0], "command not found", 127);
 		}
 	}
-	print_error_exit(cmd[0], "No such file or directory", 127);
+	print_error_exit(cmdlines[0], "No such file or directory", 127);
 }
 
 static void	exec_cmd(t_cmd *cmd)
@@ -44,7 +43,7 @@ static void	exec_cmd(t_cmd *cmd)
 	if (!ft_strcmp(cmd->node->str, "."))
 		print_error_exit(cmd->node->str, "filename argument required", 2);
 	if (ft_strchr(cmd->node->str, '/'))
-		exec_file(cmd->node->str);
+		exec_file(cmd);
 	path = find_path(cmd->node->str);
 	if (path == NULL)
 		print_error_exit(cmd->node->str, "No such file or directory", 127);
